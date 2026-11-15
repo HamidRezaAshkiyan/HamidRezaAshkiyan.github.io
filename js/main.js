@@ -6,6 +6,16 @@
 // Fallback posts data (used if fetch fails on local file:// protocol)
 const FALLBACK_POSTS = [
   {
+    id: "modular-monolith-clean-architecture",
+    slug: "modular-monolith-clean-architecture",
+    title: "Structuring Modular Monoliths with Clean Architecture, MediatR & MassTransit",
+    date: "2026-11-15",
+    readTime: "8 min read",
+    tags: ["Modular Monolith", "Clean Architecture", "DDD", "MediatR", "MassTransit", "C# .NET"],
+    summary: "How to design loosely coupled modules with independent persistence, strict contract boundaries, and asynchronous event buses before jumping prematurely to microservices.",
+    file: "blog/modular-monolith-clean-architecture.md"
+  },
+  {
     id: "transactional-outbox-pattern",
     slug: "transactional-outbox-pattern",
     title: "Eliminating Dual-Write Hazards: Transactional Outbox Pattern in .NET & RabbitMQ",
@@ -118,7 +128,6 @@ async function openPost(slug) {
     const cleanMarkdown = rawMarkdown.replace(/^---[\s\S]*?---\s*/, "");
     contentEl.innerHTML = renderSimpleMarkdown(cleanMarkdown);
   } catch (err) {
-    // If running from file:// without web server, render the summary and placeholder
     contentEl.innerHTML = `
       <h1>${escapeHtml(post.title)}</h1>
       <p style="color: var(--accent-amber); font-family: var(--font-mono); font-size: 0.85rem; margin: 1rem 0;">
@@ -233,7 +242,6 @@ function initTerminal() {
   if (toggleBtn) toggleBtn.addEventListener("click", toggleTerminal);
   if (closeBtn) closeBtn.addEventListener("click", () => drawer.classList.remove("open"));
 
-  // Toggle with backtick key
   window.addEventListener("keydown", (e) => {
     if (e.key === "`" && !["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) {
       e.preventDefault();
@@ -260,13 +268,13 @@ function executeCommand(cmd, logsEl) {
     case "help":
       appendTerminalLine(
         "Available commands:\n" +
-        "  whoami          Display engineer profile & mission\n" +
-        "  skills          Print core stack matrix & microservices tooling\n" +
+        "  whoami          Display engineer profile & bio\n" +
+        "  skills          Print core stack matrix & backend tooling\n" +
         "  arch            Render ASCII distributed architecture\n" +
         "  projects        List primary production repositories\n" +
         "  posts           List published engineering articles\n" +
         "  curl            Try 'curl /health' or 'curl /metrics'\n" +
-        "  contact         Show secure reachability options\n" +
+        "  contact         Show reachability options & LinkedIn\n" +
         "  clear           Clear the terminal logs\n" +
         "  exit            Close terminal drawer",
         "output", logsEl
@@ -276,21 +284,21 @@ function executeCommand(cmd, logsEl) {
     case "whoami":
       appendTerminalLine(
         "Hamid Reza Ashkiyan\n" +
-        "Senior Backend Engineer & Distributed Systems Architect\n" +
-        "Experience: 8+ years\n" +
-        "Location: Tehran / Remote\n" +
-        "Primary Mission: Designing resilient, high-throughput microservices using .NET, RabbitMQ, and PostgreSQL with zero dual-write vulnerabilities.",
+        "Senior Backend Engineer & Distributed Systems Architect (8+ years)\n" +
+        "Stack: C#, ASP.NET Core, Clean Architecture, DDD, MediatR, MassTransit, RabbitMQ, SQL Server, PostgreSQL, Git\n" +
+        "LinkedIn: https://www.linkedin.com/in/hamidrezaashkiyan/\n" +
+        "GitHub:   https://github.com/HamidRezaAshkiyan",
         "output", logsEl
       );
       break;
 
     case "skills":
       appendTerminalLine(
-        "[BACKEND]       C# (.NET 8/9/10), ASP.NET Core, EF Core, Clean Architecture, DDD\n" +
-        "[MESSAGING]     RabbitMQ, Kafka, Event-Driven Architecture, Outbox Pattern\n" +
-        "[DATABASES]     PostgreSQL, Redis (Distributed Caching & Redlock), SQL Server\n" +
-        "[CONTAINERS]    Docker, Docker Compose, Kubernetes, Keycloak (OIDC/JWT)\n" +
-        "[OBSERVABILITY] OpenTelemetry, Prometheus, Grafana, Structured Serilog",
+        "[LANGUAGES & CORE]   C# (.NET 8/9/10), ASP.NET Core Web API, SQL, Python\n" +
+        "[ARCHITECTURE]      Domain-Driven Design (DDD), Clean Architecture, Modular Monoliths, Microservices, CQRS\n" +
+        "[MESSAGING & BUS]    RabbitMQ, MassTransit, MediatR, In-Memory EventBus, Outbox/Inbox Patterns\n" +
+        "[DATABASES]         Microsoft SQL Server, PostgreSQL, Redis (Distributed Cache & Redlock), EF Core, Dapper\n" +
+        "[DEVOPS & TOOLS]    Git, Docker, Docker Compose, Keycloak (OIDC/JWT), OpenTelemetry, Serilog",
         "output", logsEl
       );
       break;
@@ -298,12 +306,13 @@ function executeCommand(cmd, logsEl) {
     case "arch":
       appendTerminalLine(
         "+-------------+      +------------------+      +----------------------+\n" +
-        "|  API Gate   | ---> | Auth / Keycloak  | ---> | Orders Microservice  |\n" +
+        "|  API Gate   | ---> | Auth / Keycloak  | ---> | Orders (MediatR/CQRS)|\n" +
         "+-------------+      +------------------+      +----------------------+\n" +
-        "                                                         | (Outbox)\n" +
+        "                                                         | (MassTransit)\n" +
         "                                                         v\n" +
         "+-------------+      +------------------+      +----------------------+\n" +
-        "| PostgreSQL  | <--- | Payment Service  | <--- |  RabbitMQ Event Bus  |\n" +
+        "| SQL Server  | <--- | Payment Service  | <--- |  RabbitMQ Event Bus  |\n" +
+        "| PostgreSQL  |      | (Consumer/Inbox) |      |                      |\n" +
         "+-------------+      +------------------+      +----------------------+",
         "output", logsEl
       );
@@ -311,27 +320,29 @@ function executeCommand(cmd, logsEl) {
 
     case "projects":
       appendTerminalLine(
-        "1. KasraCodeChallenge       - 3-tier microservices (.NET 10, RabbitMQ, PostgreSQL, Keycloak)\n" +
-        "2. TelegramAIStoryEngine   - Asynchronous worker queue for AI language generation\n" +
-        "3. LibTrack                - Clean Architecture inventory & reservation state machine\n" +
-        "4. PersianKeyboardRedefined- Low-level OS layout standardizer\n" +
-        "5. HiddenVirusRemover      - C# NTFS file attribute recovery engine",
+        "1. ModularMonolith         - ASP.NET Core (.NET 10), Clean Architecture, MediatR, MassTransit\n" +
+        "2. KasraCodeChallenge      - 3-tier microservices (.NET 10, RabbitMQ, PostgreSQL, Keycloak)\n" +
+        "3. TelegramAIStoryEngine   - Asynchronous worker queue for AI language generation\n" +
+        "4. LibTrack                - Clean Architecture inventory & reservation state machine\n" +
+        "5. PersianKeyboardRedefined- Low-level OS layout standardizer\n" +
+        "6. HiddenVirusRemover      - C# NTFS file attribute recovery engine",
         "output", logsEl
       );
       break;
 
     case "posts":
       appendTerminalLine(
-        "1. Eliminating Dual-Write Hazards: Transactional Outbox Pattern in .NET\n" +
-        "2. Designing Bulletproof Idempotent Consumers in Distributed Systems\n" +
-        "3. Distributed Tracing & Correlation IDs Across 20+ Microservices",
+        "1. Structuring Modular Monoliths with Clean Architecture, MediatR & MassTransit\n" +
+        "2. Eliminating Dual-Write Hazards: Transactional Outbox Pattern in .NET & RabbitMQ\n" +
+        "3. Designing Bulletproof Idempotent Consumers in Distributed Systems\n" +
+        "4. Distributed Tracing & Correlation IDs Across 20+ Microservices",
         "output", logsEl
       );
       break;
 
     case "curl":
       if (parts[1] === "/health" || parts[1] === "/api/health") {
-        appendTerminalLine('{"status":"HEALTHY","uptime":"8y 4m","services":12,"redis":"PONG","rabbitmq":"CONNECTED"}', "output", logsEl);
+        appendTerminalLine('{"status":"HEALTHY","uptime":"8y 4m","services":12,"sql_server":"CONNECTED","rabbitmq":"CONNECTED","masstransit":"RUNNING"}', "output", logsEl);
       } else if (parts[1] === "/metrics") {
         appendTerminalLine('http_requests_total{status="200"} 8492019\nevent_lag_seconds 0.002\nmemory_allocated_mb 142.6', "output", logsEl);
       } else {
@@ -341,9 +352,10 @@ function executeCommand(cmd, logsEl) {
 
     case "contact":
       appendTerminalLine(
+        "LinkedIn: https://www.linkedin.com/in/hamidrezaashkiyan/\n" +
         "GitHub:   https://github.com/HamidRezaAshkiyan\n" +
         "Email:    hamidrezaashkiyan@gmail.com\n" +
-        "Status:   Open to Senior Backend / Microservices Architecture roles.",
+        "Status:   Open to Senior Backend Engineer / Architecture roles.",
         "output", logsEl
       );
       break;

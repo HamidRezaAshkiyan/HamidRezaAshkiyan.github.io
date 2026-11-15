@@ -1,5 +1,15 @@
 [
   {
+    "id": "modular-monolith-clean-architecture",
+    "slug": "modular-monolith-clean-architecture",
+    "title": "Structuring Modular Monoliths with Clean Architecture, MediatR & MassTransit",
+    "date": "2026-11-15",
+    "readTime": "8 min read",
+    "tags": ["Modular Monolith", "Clean Architecture", "DDD", "MediatR", "MassTransit", "C# .NET"],
+    "summary": "How to design loosely coupled modules with independent persistence, strict contract boundaries, and asynchronous event buses before jumping prematurely to microservices.",
+    "file": "blog/modular-monolith-clean-architecture.md"
+  },
+  {
     "id": "transactional-outbox-pattern",
     "slug": "transactional-outbox-pattern",
     "title": "Eliminating Dual-Write Hazards: Transactional Outbox Pattern in .NET & RabbitMQ",
