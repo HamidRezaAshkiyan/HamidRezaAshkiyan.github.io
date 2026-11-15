@@ -1,0 +1,32 @@
+[
+  {
+    "id": "transactional-outbox-pattern",
+    "slug": "transactional-outbox-pattern",
+    "title": "Eliminating Dual-Write Hazards: Transactional Outbox Pattern in .NET & RabbitMQ",
+    "date": "2026-09-18",
+    "readTime": "7 min read",
+    "tags": ["Distributed Systems", "RabbitMQ", ".NET", "PostgreSQL", "Architecture"],
+    "summary": "Why database commits combined with direct message publishing fail in production, and how to implement a bulletproof transactional outbox with change data capture or polling workers.",
+    "file": "blog/transactional-outbox-pattern.md"
+  },
+  {
+    "id": "idempotent-event-processing",
+    "slug": "idempotent-event-processing",
+    "title": "Designing Bulletproof Idempotent Consumers in Distributed Systems",
+    "date": "2026-07-04",
+    "readTime": "5 min read",
+    "tags": ["Microservices", "Event-Driven", "RabbitMQ", "Resilience"],
+    "summary": "Network retries and broker reconnects inevitably lead to duplicate messages. Here is how we design zero-duplicate consumer pipelines with distributed locks and inbox tables.",
+    "file": "blog/idempotent-event-processing.md"
+  },
+  {
+    "id": "microservices-observability",
+    "slug": "microservices-observability",
+    "title": "Distributed Tracing & Correlation IDs Across 20+ Microservices",
+    "date": "2026-05-12",
+    "readTime": "6 min read",
+    "tags": ["Observability", "OpenTelemetry", "Docker", "DevOps"],
+    "summary": "How to trace a single user request flowing through API gateways, messaging queues, and background processors without losing the correlation trail.",
+    "file": "blog/microservices-observability.md"
+  }
+]
