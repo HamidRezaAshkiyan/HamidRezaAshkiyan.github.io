@@ -3,472 +3,913 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hamid Reza Ashkiyan | Senior Backend Engineer &amp; Software Architect</title>
-  <meta name="description" content="Personal portfolio and engineering notes of Hamid Reza Ashkiyan. 8+ years designing high-throughput microservices, modular monoliths, C#, ASP.NET Core, Clean Architecture, DDD, MediatR, MassTransit, RabbitMQ, SQL Server, and PostgreSQL.">
+  <title>Hamid Reza Ashkiyan — Software Engineer (.NET, Distributed Systems)</title>
+  <meta name="description" content="Hamid Reza Ashkiyan — Software Engineer specialized in .NET 8 microservices at scale, DDD, Clean Architecture, RabbitMQ quorum queues, MassTransit, SQL Server, and fintech payment systems.">
+  <meta property="og:title" content="Hamid Reza Ashkiyan — Software Engineer">
+  <meta property="og:description" content="Specialized in .NET 8 microservices at scale, migrating legacy systems, and building resilient distributed backends.">
+  <meta property="og:type" content="website">
   <link rel="stylesheet" href="css/style.css">
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Top System Status Bar -->
-  <aside class="system-status-bar">
-    <div class="status-indicator">
-      <span class="status-dot"></span>
-      <span>CLUSTER STATUS: <strong>OPERATIONAL (ALL SERVICES HEALTHY)</strong></span>
-    </div>
-    <div class="status-metrics">
-      <span>UPTIME: <strong class="metric-val">8y 4m</strong></span>
-      <span>NODES: <strong class="metric-val">12 ACTIVE</strong></span>
-      <span>P99 LATENCY: <strong class="metric-val" id="metric-latency">12ms</strong></span>
-      <a href="https://www.linkedin.com/in/hamidrezaashkiyan/" target="_blank" rel="noopener" style="color: var(--accent-cyan); text-decoration: none;">[LinkedIn Profile &rarr;]</a>
-    </div>
-  </aside>
+  <!-- Reading / Scroll Progress -->
+  <div class="scroll-progress" aria-hidden="true"></div>
 
   <!-- Site Header -->
   <header class="site-header">
     <div class="container header-inner">
-      <a href="#" class="logo-link">
+      <a href="#about" class="logo-link" aria-label="Hamid Reza Ashkiyan Home">
         <span class="logo-prompt">hamid@mesh:~$</span>
         <span>whoami</span>
-        <span class="logo-cursor"></span>
+        <span class="logo-cursor" aria-hidden="true"></span>
       </a>
 
-      <nav class="main-nav">
-        <a href="#about" class="nav-link"><span class="nav-num">01.</span>// about</a>
-        <a href="#stack" class="nav-link"><span class="nav-num">02.</span>// stack</a>
-        <a href="#architecture" class="nav-link"><span class="nav-num">03.</span>// architecture</a>
-        <a href="#projects" class="nav-link"><span class="nav-num">04.</span>// projects</a>
-        <a href="#blog" class="nav-link"><span class="nav-num">05.</span>// blog</a>
-        <button id="btn-terminal-toggle" class="btn-terminal-toggle" title="Press ` key to open terminal">
-          <span>&gt;_</span> terminal
-        </button>
+      <nav class="main-nav" aria-label="Primary Navigation">
+        <a href="#about" class="nav-link active">about</a>
+        <a href="#experience" class="nav-link">experience</a>
+        <a href="#stack" class="nav-link">stack</a>
+        <a href="#architecture" class="nav-link">architecture</a>
+        <a href="#projects" class="nav-link">projects</a>
+        <a href="#blog" class="nav-link">blog</a>
+        <a href="#contact" class="nav-link">contact</a>
       </nav>
+
+      <div class="header-actions">
+        <button id="btn-theme-toggle" class="icon-btn" title="Toggle theme" aria-label="Toggle theme"></button>
+        <button id="btn-terminal-toggle" class="icon-btn accent" title="Press ` key to open terminal">
+          <span>&gt;_</span> cli
+        </button>
+        <button id="btn-mobile-menu" class="icon-btn mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </div>
     </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile Navigation">
+      <a href="#about" class="nav-link">01. about</a>
+      <a href="#experience" class="nav-link">02. experience</a>
+      <a href="#stack" class="nav-link">03. stack</a>
+      <a href="#architecture" class="nav-link">04. architecture</a>
+      <a href="#projects" class="nav-link">05. projects</a>
+      <a href="#blog" class="nav-link">06. blog</a>
+      <a href="#contact" class="nav-link">07. contact</a>
+    </nav>
   </header>
 
-  <!-- Main Content Container -->
-  <main class="container">
+  <main>
 
-    <!-- Hero Section -->
+    <!-- 01. HERO SECTION -->
     <section id="about" class="hero-section">
-      <div class="hero-terminal-card">
-        <div class="card-topbar">
-          <div class="window-dots">
-            <span class="dot-red"></span>
-            <span class="dot-yellow"></span>
-            <span class="dot-green"></span>
+      <div class="hero-bg-grid" aria-hidden="true"></div>
+      <div class="hero-glow" aria-hidden="true"></div>
+
+      <div class="container hero-inner">
+        <div class="hero-grid">
+          <div>
+            <div class="status-pill">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span>Isfahan, Iran · BackEnd Developer @ MrBilit</span>
+            </div>
+
+            <h1 class="hero-title">Hamid Reza Ashkiyan</h1>
+            <div class="hero-role">Software Engineer // .NET 8 Microservices &amp; Distributed Systems</div>
+
+            <p class="hero-summary">
+              Specialized in <strong>.NET 8 microservices at scale</strong>, with hands-on experience migrating 15+ legacy services, upgrading high-reliability <strong>RabbitMQ</strong> messaging infrastructure, and integrating <strong>fintech payment gateways</strong> in a high-traffic travel platform.
+            </p>
+
+            <blockquote class="hero-quote">
+              "Write code that's easy to change, not just easy to write."
+            </blockquote>
+
+            <div class="btn-group">
+              <a href="assets/Hamid-Reza-Ashkiyan-Resume.pdf" target="_blank" rel="noopener" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Resume (PDF)
+              </a>
+              <a href="https://www.linkedin.com/in/hamidrezaashkiyan/" target="_blank" rel="noopener" class="btn btn-outline">
+                LinkedIn &nearr;
+              </a>
+              <a href="https://github.com/HamidRezaAshkiyan" target="_blank" rel="noopener" class="btn btn-outline">
+                GitHub &nearr;
+              </a>
+              <a href="#blog" class="btn btn-ghost">
+                Read Blog &rarr;
+              </a>
+            </div>
           </div>
-          <span>bash — 80x24</span>
-          <span>ashkiyan.dev</span>
-        </div>
-        <div class="terminal-content">
-          <div class="terminal-cmd">
-            <span class="prompt-user">hamid@cloud:~$</span> curl -s https://ashkiyan.dev/api/profile | jq .
-          </div>
-          <pre class="json-output"><code>{
+
+          <!-- Minimal Terminal Profile Card -->
+          <div class="hero-terminal-card">
+            <div class="card-topbar">
+              <div class="window-dots" aria-hidden="true">
+                <span class="dot-red"></span>
+                <span class="dot-yellow"></span>
+                <span class="dot-green"></span>
+              </div>
+              <span>profile.json</span>
+              <span>v1.0</span>
+            </div>
+            <div class="terminal-content">
+              <div class="terminal-cmd">
+                <span class="prompt-user">hamid@mesh:~$</span> curl -s /api/profile | jq .
+              </div>
+              <pre class="json-output"><code>{
   <span class="json-key">"name"</span>: <span class="json-str">"Hamid Reza Ashkiyan"</span>,
-  <span class="json-key">"role"</span>: <span class="json-str">"Senior Backend Engineer &amp; Software Architect"</span>,
-  <span class="json-key">"experience"</span>: <span class="json-str">"8+ Years in Production"</span>,
-  <span class="json-key">"core_stack"</span>: {
-    <span class="json-key">"backend"</span>: [<span class="json-arr">"C#"</span>, <span class="json-arr">"ASP.NET Core (.NET 10/9/8)"</span>, <span class="json-arr">"EF Core"</span>, <span class="json-arr">"Dapper"</span>],
-    <span class="json-key">"patterns"</span>: [<span class="json-arr">"Domain-Driven Design (DDD)"</span>, <span class="json-arr">"Clean Architecture"</span>, <span class="json-arr">"CQRS (MediatR)"</span>, <span class="json-arr">"Modular Monoliths"</span>],
-    <span class="json-key">"messaging"</span>: [<span class="json-arr">"RabbitMQ"</span>, <span class="json-arr">"MassTransit"</span>, <span class="json-arr">"Event-Driven Architecture"</span>, <span class="json-arr">"Transactional Outbox"</span>],
-    <span class="json-key">"data"</span>: [<span class="json-arr">"Microsoft SQL Server"</span>, <span class="json-arr">"PostgreSQL"</span>, <span class="json-arr">"Redis"</span>],
-    <span class="json-key">"tooling"</span>: [<span class="json-arr">"Git"</span>, <span class="json-arr">"Docker"</span>, <span class="json-arr">"Docker Compose"</span>, <span class="json-arr">"Keycloak OIDC"</span>, <span class="json-arr">"OpenTelemetry"</span>]
-  }
+  <span class="json-key">"role"</span>: <span class="json-str">"BackEnd Developer @ MrBilit"</span>,
+  <span class="json-key">"location"</span>: <span class="json-str">"Isfahan, Iran"</span>,
+  <span class="json-key">"backend"</span>: [<span class="json-arr">".NET 8"</span>, <span class="json-arr">"C#"</span>, <span class="json-arr">"DDD"</span>, <span class="json-arr">"Clean Arch"</span>, <span class="json-arr">"MediatR"</span>, <span class="json-arr">"Hangfire"</span>],
+  <span class="json-key">"messaging"</span>: [<span class="json-arr">"RabbitMQ Quorum Queues"</span>, <span class="json-arr">"MassTransit"</span>],
+  <span class="json-key">"data"</span>: [<span class="json-arr">"SQL Server"</span>, <span class="json-arr">"PostgreSQL"</span>, <span class="json-arr">"Redis"</span>],
+  <span class="json-key">"devops"</span>: [<span class="json-arr">"Docker"</span>, <span class="json-arr">"Git"</span>],
+  <span class="json-key">"interests"</span>: [<span class="json-arr">"AI/LLM (Ollama, OpenClaw)"</span>, <span class="json-arr">"Open Source"</span>, <span class="json-arr">"Automation"</span>]
 }</code></pre>
-        </div>
-      </div>
-
-      <div class="hero-bio-summary">
-        <div class="hero-text">
-          <h1>Hamid Reza Ashkiyan</h1>
-          <div class="hero-subtitle">&gt; Senior Backend Engineer // Distributed Systems &amp; Clean Architecture</div>
-          <p>
-            8+ years architecting high-throughput backend services, modular monoliths, and distributed microservices. Specialized in <strong>C# / ASP.NET Core</strong>, <strong>Clean Architecture</strong>, <strong>Domain-Driven Design (DDD)</strong>, and resilient event messaging using <strong>RabbitMQ</strong>, <strong>MassTransit</strong>, and <strong>MediatR</strong> across <strong>SQL Server</strong> and <strong>PostgreSQL</strong>.
-          </p>
-          <div class="hero-badges">
-            <span class="badge highlight">C# (.NET 10)</span>
-            <span class="badge highlight">ASP.NET Core</span>
-            <span class="badge">Clean Architecture</span>
-            <span class="badge">Domain-Driven Design (DDD)</span>
-            <span class="badge">MediatR (CQRS)</span>
-            <span class="badge">MassTransit</span>
-            <span class="badge">RabbitMQ</span>
-            <span class="badge">SQL Server</span>
-            <span class="badge">PostgreSQL</span>
-            <span class="badge">Git</span>
-            <span class="badge">Docker</span>
-          </div>
-          <div class="btn-group">
-            <a href="https://www.linkedin.com/in/hamidrezaashkiyan/" target="_blank" rel="noopener" class="btn btn-primary">💼 Connect on LinkedIn</a>
-            <a href="https://github.com/HamidRezaAshkiyan" target="_blank" rel="noopener" class="btn btn-outline">🐙 GitHub Profile</a>
-            <a href="#projects" class="btn btn-outline">📦 View Repositories</a>
-            <a href="#blog" class="btn btn-outline">📖 Engineering Blog</a>
+            </div>
           </div>
         </div>
 
-        <div class="hero-stats-box">
-          <div class="stat-item">
-            <span class="stat-num">8+</span>
-            <span class="stat-label">Years Backend Experience</span>
+        <!-- Key Metrics Strip -->
+        <div class="metrics-strip">
+          <div class="metric-card">
+            <span class="metric-num">8<span>+</span></span>
+            <span class="metric-label">Years Software Engineering</span>
           </div>
-          <div class="stat-item">
-            <span class="stat-num">99.9%</span>
-            <span class="stat-label">Production Reliability SLA</span>
+          <div class="metric-card">
+            <span class="metric-num">15<span>+</span></span>
+            <span class="metric-label">Production Services → .NET 8</span>
           </div>
-          <div class="stat-item">
-            <span class="stat-num">0</span>
-            <span class="stat-label">Dual-Write Tolerance</span>
+          <div class="metric-card">
+            <span class="metric-num">76<span>+</span></span>
+            <span class="metric-label">Public GitHub Repositories</span>
           </div>
-          <div class="stat-item">
-            <span class="stat-num">&lt; 15ms</span>
-            <span class="stat-label">Target Service Latency</span>
+          <div class="metric-card">
+            <span class="metric-num">ACM<span>-ICPC</span></span>
+            <span class="metric-label">Asia Region · Sharif Univ.</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Core Stack Matrix Section -->
-    <section id="stack">
-      <div class="section-header">
-        <span class="section-tag">// 02. Core Expertise</span>
-        <h2 class="section-title">Technical Capabilities &amp; Stack Matrix</h2>
-        <p class="section-desc">Battle-tested tools, design patterns, and engineering paradigms used across 8 years of production delivery.</p>
-      </div>
-
-      <div class="arch-principles-grid">
-        <div class="principle-card">
-          <div class="p-header">
-            <span class="p-num">01</span>
-            <h3>Backend &amp; Languages</h3>
+    <!-- 02. EXPERIENCE & CREDENTIALS -->
+    <section id="experience" class="content-section">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <div>
+            <span class="section-tag">// 02. Career Timeline</span>
+            <h2 class="section-title">Professional Experience</h2>
+            <p class="section-desc">End-to-end engineering across high-traffic travel fintech, e-commerce backends, and large-scale desktop systems.</p>
           </div>
-          <p>
-            <strong>C# (.NET 8/9/10), ASP.NET Core Web API</strong>, Entity Framework Core (EF Core), Dapper, LINQ, Async/Await ThreadPool optimization, Python.
-          </p>
         </div>
 
-        <div class="principle-card">
-          <div class="p-header">
-            <span class="p-num">02</span>
-            <h3>Architectural Paradigms</h3>
-          </div>
-          <p>
-            <strong>Domain-Driven Design (DDD)</strong>, <strong>Clean Architecture</strong> (Hexagonal/Onion), <strong>Modular Monoliths</strong>, Microservices, CQRS, Event-Driven Architecture (EDA).
-          </p>
+        <div class="timeline">
+          <!-- MrBilit -->
+          <article class="timeline-item current spotlight-card" data-reveal>
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="exp-header">
+              <div>
+                <h3 class="exp-role">BackEnd Developer</h3>
+                <div class="exp-company">MrBilit · Isfahan (On-site)</div>
+              </div>
+              <div class="exp-meta">
+                <span class="exp-badge">Current</span>
+                <span>May 2022 – Present</span>
+              </div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Designed and implemented backend services and REST APIs using <strong>.NET 8</strong>, <strong>DDD</strong>, and <strong>microservices</strong> principles.</li>
+              <li><strong>Migrated 15+ services to .NET 8</strong>, enhancing runtime performance and long-term maintainability.</li>
+              <li>Integrated external fintech payment gateways (<strong>Zarrinpal</strong>, <strong>Azkivam</strong>) and automated <strong>tax registration systems</strong>.</li>
+              <li>Upgraded messaging infrastructure to <strong>RabbitMQ quorum queues</strong> with <strong>MassTransit</strong> to increase fault tolerance.</li>
+              <li>Implemented background job processing using <strong>Hangfire</strong> and containerized deployments with <strong>Docker</strong>.</li>
+              <li>Optimized critical <strong>SQL Server</strong> stored procedures and query execution plans.</li>
+            </ul>
+            <div class="tag-row">
+              <span class="tech-tag accent">.NET 8</span>
+              <span class="tech-tag accent">Microservices</span>
+              <span class="tech-tag">DDD</span>
+              <span class="tech-tag">RabbitMQ Quorum</span>
+              <span class="tech-tag">MassTransit</span>
+              <span class="tech-tag">Hangfire</span>
+              <span class="tech-tag">SQL Server</span>
+              <span class="tech-tag">Docker</span>
+            </div>
+          </article>
+
+          <!-- Rahnema College -->
+          <article class="timeline-item spotlight-card" data-reveal>
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="exp-header">
+              <div>
+                <h3 class="exp-role">Software Development Bootcamp</h3>
+                <div class="exp-company">Rahnema College · Remote</div>
+              </div>
+              <div class="exp-meta">
+                <span>Sep 2021 – Dec 2021</span>
+              </div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Participated in an intensive engineering bootcamp focused on <strong>full-stack development</strong> and <strong>Agile (Scrum)</strong> methodologies.</li>
+              <li>Collaborated on a LinkedIn-like social platform using <strong>Java (Spring Boot)</strong>, <strong>React</strong>, and <strong>GraphQL</strong>.</li>
+            </ul>
+            <div class="tag-row">
+              <span class="tech-tag">Java (Spring Boot)</span>
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">GraphQL</span>
+              <span class="tech-tag">Agile / Scrum</span>
+              <span class="tech-tag">Docker</span>
+            </div>
+          </article>
+
+          <!-- Cartiba -->
+          <article class="timeline-item spotlight-card" data-reveal>
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="exp-header">
+              <div>
+                <h3 class="exp-role">Back End Developer</h3>
+                <div class="exp-company">Cartiba · Isfahan, Iran</div>
+              </div>
+              <div class="exp-meta">
+                <span>Aug 2020 – Jan 2021</span>
+              </div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Developed and maintained the backend infrastructure for a <strong>Laravel</strong>-based e-commerce platform.</li>
+              <li>Designed and implemented <strong>RESTful APIs</strong> and views to facilitate store management and user interactions.</li>
+            </ul>
+            <div class="tag-row">
+              <span class="tech-tag">Laravel</span>
+              <span class="tech-tag">PHP</span>
+              <span class="tech-tag">RESTful APIs</span>
+              <span class="tech-tag">E-Commerce</span>
+            </div>
+          </article>
+
+          <!-- Yasin Engineering Group -->
+          <article class="timeline-item spotlight-card" data-reveal>
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="exp-header">
+              <div>
+                <h3 class="exp-role">Software Developer</h3>
+                <div class="exp-company">Yasin Engineering Group · Isfahan, Iran</div>
+              </div>
+              <div class="exp-meta">
+                <span>Jul 2017 – Mar 2020</span>
+              </div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Acted as primary developer for desktop and web applications, handling <strong>end-to-end ownership</strong> from design to deployment.</li>
+              <li>Developed comprehensive <strong>clinic management systems</strong> and large-scale <strong>WPF</strong> applications.</li>
+            </ul>
+            <div class="tag-row">
+              <span class="tech-tag">C#</span>
+              <span class="tech-tag">WPF</span>
+              <span class="tech-tag">SQL Server</span>
+              <span class="tech-tag">Desktop &amp; Web</span>
+            </div>
+          </article>
         </div>
 
-        <div class="principle-card">
-          <div class="p-header">
-            <span class="p-num">03</span>
-            <h3>Messaging &amp; Mediation</h3>
+        <!-- Education, Certifications, Languages & Interests -->
+        <div class="credentials-grid" data-reveal>
+          <div class="cred-card spotlight-card">
+            <span class="cred-label">Education</span>
+            <h3>B.Sc. in Information Technology</h3>
+            <p>University of Sheikh Bahaei, Isfahan, Iran</p>
+            <span class="cred-sub">2015 – 2020</span>
           </div>
-          <p>
-            <strong>RabbitMQ, MassTransit, MediatR</strong>, In-Memory Event Buses, Topic Exchanges, Transactional Outbox Pattern, Deduplication Inboxes, Sagas.
-          </p>
-        </div>
 
-        <div class="principle-card">
-          <div class="p-header">
-            <span class="p-num">04</span>
-            <h3>Databases &amp; Caching</h3>
+          <div class="cred-card spotlight-card">
+            <span class="cred-label">Certifications</span>
+            <ul class="cred-list">
+              <li>
+                <strong>ACM-ICPC Asia Region</strong>
+                <span class="cred-sub">Certificate of Achievement · Sharif University</span>
+              </li>
+              <li>
+                <strong>Software Development Certificate</strong>
+                <span class="cred-sub">Rahnema College</span>
+              </li>
+            </ul>
           </div>
-          <p>
-            <strong>Microsoft SQL Server</strong>, <strong>PostgreSQL</strong>, Redis (Distributed Caching &amp; Redlock), ACID Transactions, Index Tuning, Row-Lock Guards.
-          </p>
-        </div>
 
-        <div class="principle-card">
-          <div class="p-header">
-            <span class="p-num">05</span>
-            <h3>Version Control &amp; DevOps</h3>
+          <div class="cred-card spotlight-card">
+            <span class="cred-label">Languages &amp; Interests</span>
+            <ul class="cred-list">
+              <li><strong>Languages:</strong> Persian (Native), English (Professional)</li>
+              <li><strong>Interests:</strong> AI/LLM Integration (Ollama, OpenClaw), Open Source Contribution, Workflow Automation</li>
+            </ul>
           </div>
-          <p>
-            <strong>Git</strong> (GitFlow, trunk-based delivery), <strong>Docker &amp; Docker Compose</strong>, GitHub Actions CI/CD pipelines, Linux environments.
-          </p>
-        </div>
-
-        <div class="principle-card">
-          <div class="p-header">
-            <span class="p-num">06</span>
-            <h3>Security &amp; Observability</h3>
-          </div>
-          <p>
-            <strong>Keycloak (OpenID Connect / OAuth2 / JWT)</strong>, OpenTelemetry, W3C TraceContext propagation, Serilog structured JSON logging.
-          </p>
         </div>
       </div>
     </section>
 
-    <!-- Architecture & Microservices Section -->
-    <section id="architecture">
-      <div class="section-header">
-        <span class="section-tag">// 03. System Blueprint</span>
-        <h2 class="section-title">Distributed Systems &amp; Modular Topology</h2>
-        <p class="section-desc">How components communicate reliably through MassTransit, RabbitMQ, and atomic persistence.</p>
+    <!-- 03. TECHNICAL STACK MATRIX -->
+    <section id="stack" class="content-section">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <div>
+            <span class="section-tag">// 03. Core Capabilities</span>
+            <h2 class="section-title">Technical Stack Matrix</h2>
+            <p class="section-desc">Focused on maintainable .NET backends, resilient messaging topologies, and clean systems engineering.</p>
+          </div>
+        </div>
+
+        <div class="stack-grid" data-reveal>
+          <div class="stack-card spotlight-card">
+            <div class="stack-card-head">
+              <h3>Backend &amp; Architecture</h3>
+              <span class="p-num">01</span>
+            </div>
+            <p>High-throughput APIs, domain modeling, and long-lived modular codebases.</p>
+            <div class="tag-row">
+              <span class="tech-tag accent">.NET 8 / 9 / 10</span>
+              <span class="tech-tag accent">C#</span>
+              <span class="tech-tag">ASP.NET Core</span>
+              <span class="tech-tag">Microservices</span>
+              <span class="tech-tag">DDD</span>
+              <span class="tech-tag">Clean Architecture</span>
+              <span class="tech-tag">MediatR</span>
+              <span class="tech-tag">Hangfire</span>
+              <span class="tech-tag">EF Core</span>
+              <span class="tech-tag">Dapper</span>
+            </div>
+          </div>
+
+          <div class="stack-card spotlight-card">
+            <div class="stack-card-head">
+              <h3>Data &amp; Messaging</h3>
+              <span class="p-num">02</span>
+            </div>
+            <p>Fault-tolerant event pipelines, atomic persistence, and query optimization.</p>
+            <div class="tag-row">
+              <span class="tech-tag accent">SQL Server</span>
+              <span class="tech-tag accent">RabbitMQ (Quorum)</span>
+              <span class="tech-tag accent">MassTransit</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">Redis</span>
+              <span class="tech-tag">Stored Procedures</span>
+              <span class="tech-tag">Transactional Outbox</span>
+              <span class="tech-tag">Idempotent Inbox</span>
+            </div>
+          </div>
+
+          <div class="stack-card spotlight-card">
+            <div class="stack-card-head">
+              <h3>DevOps, Security &amp; Observability</h3>
+              <span class="p-num">03</span>
+            </div>
+            <p>Reproducible deployments, identity standards, and end-to-end request tracing.</p>
+            <div class="tag-row">
+              <span class="tech-tag accent">Docker</span>
+              <span class="tech-tag accent">Git</span>
+              <span class="tech-tag">Docker Compose</span>
+              <span class="tech-tag">Keycloak (OIDC / JWT)</span>
+              <span class="tech-tag">OpenTelemetry</span>
+              <span class="tech-tag">Serilog</span>
+              <span class="tech-tag">CI/CD</span>
+            </div>
+          </div>
+
+          <div class="stack-card spotlight-card">
+            <div class="stack-card-head">
+              <h3>Systems, Cross-Platform &amp; AI</h3>
+              <span class="p-num">04</span>
+            </div>
+            <p>Open-source desktop utilities, native system tools, and local LLM workflows.</p>
+            <div class="tag-row">
+              <span class="tech-tag">Rust</span>
+              <span class="tech-tag">Swift</span>
+              <span class="tech-tag">WPF</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Java / Spring Boot</span>
+              <span class="tech-tag">Laravel</span>
+              <span class="tech-tag">GraphQL</span>
+              <span class="tech-tag">Ollama / OpenClaw</span>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <!-- Interactive SVG Architecture Diagram -->
-      <div class="arch-diagram-wrapper">
-        <svg class="arch-svg" viewBox="0 0 920 320" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="boxGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#141c2c"/>
-              <stop offset="100%" stop-color="#0a0d14"/>
-            </linearGradient>
-            <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981"/>
-            </marker>
-            <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
-            </marker>
-          </defs>
+    <!-- 04. DISTRIBUTED ARCHITECTURE -->
+    <section id="architecture" class="content-section">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <div>
+            <span class="section-tag">// 04. System Blueprint</span>
+            <h2 class="section-title">Production Microservices Topology</h2>
+            <p class="section-desc">Interactive blueprint of how services coordinate reliably across .NET 8, SQL Server, MassTransit, RabbitMQ Quorum Queues, and Hangfire.</p>
+          </div>
+        </div>
 
-          <!-- Client / Gateway -->
-          <rect x="20" y="115" width="130" height="70" rx="6" fill="url(#boxGrad)" stroke="#1e293b" stroke-width="1.5"/>
-          <text x="85" y="145" fill="#f1f5f9" font-family="'JetBrains Mono', monospace" font-size="12" text-anchor="middle" font-weight="700">Client / Gateway</text>
-          <text x="85" y="165" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="10" text-anchor="middle">Reverse Proxy / TLS</text>
+        <div class="arch-diagram-wrapper" data-reveal>
+          <svg class="arch-svg" viewBox="0 0 920 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Distributed Microservices Architecture Diagram">
+            <defs>
+              <linearGradient id="nodeGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#131a29"/>
+                <stop offset="100%" stop-color="#0a0e17"/>
+              </linearGradient>
+              <marker id="arr-green" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981"/>
+              </marker>
+              <marker id="arr-cyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+              </marker>
+            </defs>
 
-          <!-- Auth Service -->
-          <rect x="210" y="25" width="160" height="70" rx="6" fill="url(#boxGrad)" stroke="#1e293b" stroke-width="1.5"/>
-          <text x="290" y="55" fill="#f1f5f9" font-family="'JetBrains Mono', monospace" font-size="12" text-anchor="middle" font-weight="700">Auth &amp; Identity</text>
-          <text x="290" y="75" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="10" text-anchor="middle">Keycloak / OIDC JWT</text>
+            <!-- Flow Paths (Animated) -->
+            <path d="M 110 115 L 110 58 L 205 58" fill="none" stroke="#475569" stroke-width="1.5" class="flow-line-slow" marker-end="url(#arr-cyan)"/>
+            <path d="M 155 150 L 182 150 L 182 222 L 205 222" fill="none" stroke="#10b981" stroke-width="2" class="flow-line" marker-end="url(#arr-green)"/>
+            <path d="M 380 245 L 675 245" fill="none" stroke="#10b981" stroke-width="2" class="flow-line" marker-end="url(#arr-green)"/>
+            <path d="M 380 205 L 412 205 L 412 155 L 435 155" fill="none" stroke="#38bdf8" stroke-width="2" class="flow-line" marker-end="url(#arr-cyan)"/>
+            <path d="M 625 135 L 652 135 L 652 82 L 675 82" fill="none" stroke="#38bdf8" stroke-width="2" class="flow-line" marker-end="url(#arr-cyan)"/>
+            <path d="M 530 190 L 530 282 L 675 282" fill="none" stroke="#475569" stroke-width="1.5" class="flow-line-slow" marker-end="url(#arr-green)"/>
 
-          <!-- Orders Microservice / Module -->
-          <rect x="210" y="185" width="165" height="85" rx="6" fill="url(#boxGrad)" stroke="#10b981" stroke-width="1.5"/>
-          <text x="292" y="215" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="12" text-anchor="middle" font-weight="700">Orders (MediatR/CQRS)</text>
-          <text x="292" y="235" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="10" text-anchor="middle">Clean Architecture + DDD</text>
-          <text x="292" y="252" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="9" text-anchor="middle">Commands, Handlers &amp; Events</text>
+            <!-- Node 1: Gateway -->
+            <g class="arch-node" tabindex="0" data-title="API Gateway &amp; Edge" data-detail="TLS termination, rate limiting, W3C TraceContext injection, and routing to .NET 8 services.">
+              <rect x="20" y="115" width="135" height="72" rx="8" fill="url(#nodeGrad)" stroke="#334155" stroke-width="1.4"/>
+              <text x="87" y="146" fill="#f1f5f9" font-family="'JetBrains Mono', monospace" font-size="12" text-anchor="middle" font-weight="600">API Gateway</text>
+              <text x="87" y="166" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="10" text-anchor="middle">TLS / Rate Limit</text>
+            </g>
 
-          <!-- MassTransit & Message Broker -->
-          <rect x="440" y="110" width="180" height="80" rx="6" fill="url(#boxGrad)" stroke="#38bdf8" stroke-width="1.5"/>
-          <text x="530" y="140" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="13" text-anchor="middle" font-weight="700">MassTransit + RabbitMQ</text>
-          <text x="530" y="160" fill="#f1f5f9" font-family="'JetBrains Mono', monospace" font-size="10" text-anchor="middle">Topic Exchange + Dead Letter</text>
-          <text x="530" y="176" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="9" text-anchor="middle">Integration Event Bus</text>
+            <!-- Node 2: Auth -->
+            <g class="arch-node" tabindex="0" data-title="Auth &amp; Identity" data-detail="OpenID Connect / JWT token validation with Keycloak and fine-grained role policies.">
+              <rect x="208" y="24" width="170" height="68" rx="8" fill="url(#nodeGrad)" stroke="#334155" stroke-width="1.4"/>
+              <text x="293" y="54" fill="#f1f5f9" font-family="'JetBrains Mono', monospace" font-size="12" text-anchor="middle" font-weight="600">Auth &amp; Identity</text>
+              <text x="293" y="73" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="10" text-anchor="middle">Keycloak / OIDC JWT</text>
+            </g>
 
-          <!-- Payments Consumer -->
-          <rect x="680" y="45" width="170" height="75" rx="6" fill="url(#boxGrad)" stroke="#1e293b" stroke-width="1.5"/>
-          <text x="765" y="75" fill="#f1f5f9" font-family="'JetBrains Mono', monospace" font-size="12" text-anchor="middle" font-weight="700">Payments Consumer</text>
-          <text x="765" y="95" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="10" text-anchor="middle">MassTransit IConsumer&lt;T&gt;</text>
-          <text x="765" y="110" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="9" text-anchor="middle">Deduplication Inbox</text>
+            <!-- Node 3: Core .NET 8 Service -->
+            <g class="arch-node active" tabindex="0" data-title=".NET 8 Service (MediatR / DDD)" data-detail="Clean Architecture boundaries with DDD aggregates, CQRS command handlers, and Hangfire scheduled jobs.">
+              <rect x="208" y="180" width="172" height="86" rx="8" fill="url(#nodeGrad)" stroke="#10b981" stroke-width="1.6"/>
+              <text x="294" y="210" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="12" text-anchor="middle" font-weight="600">.NET 8 Service</text>
+              <text x="294" y="229" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="10" text-anchor="middle">DDD · Clean Arch · MediatR</text>
+              <text x="294" y="247" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="9.5" text-anchor="middle">Hangfire Background Jobs</text>
+            </g>
 
-          <!-- Database Tier -->
-          <rect x="680" y="185" width="170" height="85" rx="6" fill="url(#boxGrad)" stroke="#10b981" stroke-width="1.5"/>
-          <text x="765" y="215" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="12" text-anchor="middle" font-weight="700">SQL Server / Postgres</text>
-          <text x="765" y="235" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="10" text-anchor="middle">Transactional Outbox</text>
-          <text x="765" y="252" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="9" text-anchor="middle">ACID Isolation / EF Core</text>
+            <!-- Node 4: MassTransit + RabbitMQ -->
+            <g class="arch-node" tabindex="0" data-title="MassTransit + RabbitMQ Quorum Queues" data-detail="Raft-replicated quorum queues for fault tolerance, automatic retries, and dead-letter handling.">
+              <rect x="438" y="108" width="188" height="82" rx="8" fill="url(#nodeGrad)" stroke="#38bdf8" stroke-width="1.6"/>
+              <text x="532" y="138" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="12.5" text-anchor="middle" font-weight="600">MassTransit + RabbitMQ</text>
+              <text x="532" y="157" fill="#f1f5f9" font-family="'JetBrains Mono', monospace" font-size="10" text-anchor="middle">Quorum Queues + DLQ</text>
+              <text x="532" y="174" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="9.5" text-anchor="middle">Fault-Tolerant Event Bus</text>
+            </g>
 
-          <!-- Flow Lines -->
-          <path d="M 120 115 L 120 60 L 210 60" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
-          <path d="M 150 150 L 180 150 L 180 220 L 210 220" fill="none" stroke="#10b981" stroke-width="2" marker-end="url(#arrow)"/>
-          <path d="M 375 240 L 680 240" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#arrow)"/>
-          <path d="M 375 210 L 410 210 L 410 160 L 440 160" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow-cyan)"/>
-          <path d="M 620 140 L 650 140 L 650 85 L 680 85" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow-cyan)"/>
-          <path d="M 680 100 L 630 100 L 630 125 L 620 125" fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrow)"/>
-        </svg>
-      </div>
+            <!-- Node 5: Fintech & Payment Consumer -->
+            <g class="arch-node" tabindex="0" data-title="Payments &amp; Tax Consumers" data-detail="Idempotent MassTransit consumers integrating Zarrinpal, Azkivam, and automated tax registration systems.">
+              <rect x="678" y="42" width="218" height="80" rx="8" fill="url(#nodeGrad)" stroke="#334155" stroke-width="1.4"/>
+              <text x="787" y="72" fill="#f1f5f9" font-family="'JetBrains Mono', monospace" font-size="12" text-anchor="middle" font-weight="600">Payments &amp; Tax Workers</text>
+              <text x="787" y="91" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="10" text-anchor="middle">Zarrinpal · Azkivam · Tax API</text>
+              <text x="787" y="108" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="9.5" text-anchor="middle">Idempotent Inbox Consumer</text>
+            </g>
 
-      <div class="arch-principles-grid">
-        <div class="principle-card">
-          <div class="p-header">
+            <!-- Node 6: SQL Server & Outbox -->
+            <g class="arch-node" tabindex="0" data-title="SQL Server / PostgreSQL + Outbox" data-detail="Atomic ACID commits storing domain state + outbox events in one transaction, tuned stored procedures &amp; indexes.">
+              <rect x="678" y="198" width="218" height="96" rx="8" fill="url(#nodeGrad)" stroke="#10b981" stroke-width="1.6"/>
+              <text x="787" y="229" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="12" text-anchor="middle" font-weight="600">SQL Server / Postgres</text>
+              <text x="787" y="248" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="10" text-anchor="middle">Transactional Outbox Table</text>
+              <text x="787" y="266" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="9.5" text-anchor="middle">Tuned Stored Procs · EF Core</text>
+            </g>
+          </svg>
+
+          <div class="arch-inspector">
+            <span id="arch-inspector-text"><strong>.NET 8 Service (MediatR / DDD)</strong> — Clean Architecture boundaries with DDD aggregates, CQRS command handlers, and Hangfire scheduled jobs.</span>
+            <span style="color:#64748b;">Hover or click any node to inspect</span>
+          </div>
+        </div>
+
+        <div class="principles-grid" data-reveal>
+          <div class="principle-card spotlight-card">
             <span class="p-num">01</span>
             <h3>Clean Architecture &amp; DDD</h3>
+            <p>Strict dependency inversion keeping domain invariants isolated from infrastructure and transport concerns.</p>
           </div>
-          <p>Strict dependency inversion: Domain entities have zero external package dependencies. Application commands and queries are orchestrated with MediatR.</p>
-        </div>
-
-        <div class="principle-card">
-          <div class="p-header">
+          <div class="principle-card spotlight-card">
             <span class="p-num">02</span>
-            <h3>MassTransit &amp; RabbitMQ</h3>
+            <h3>Quorum Queue Resilience</h3>
+            <p>Replicated RabbitMQ quorum queues with MassTransit retries and DLQ policies to eliminate message loss.</p>
           </div>
-          <p>Decoupled asynchronous event delivery across services with automatic retries, exponential backoff, dead-letter queues (DLQ), and outbox message batching.</p>
-        </div>
-
-        <div class="principle-card">
-          <div class="p-header">
+          <div class="principle-card spotlight-card">
             <span class="p-num">03</span>
-            <h3>Transactional Outbox</h3>
+            <h3>Zero Dual-Write Hazards</h3>
+            <p>Atomic database writes + transactional outbox guarantee at-least-once event delivery under crashes.</p>
           </div>
-          <p>Guaranteed at-least-once message delivery without dual-write hazards by saving domain state and outbox messages within one atomic SQL Server/Postgres transaction.</p>
-        </div>
-
-        <div class="principle-card">
-          <div class="p-header">
+          <div class="principle-card spotlight-card">
             <span class="p-num">04</span>
-            <h3>Idempotency by Design</h3>
-          </div>
-          <p>Consumers guard against network duplicates using unique message IDs, distributed Redis locks, and deduplication inbox constraints.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-      <div class="section-header">
-        <span class="section-tag">// 04. Production Repositories</span>
-        <h2 class="section-title">Featured Engineering Projects</h2>
-        <p class="section-desc">Modular monoliths, distributed microservices, clean architecture backends, and system tools.</p>
-      </div>
-
-      <div class="projects-grid">
-        <!-- Modular Monolith -->
-        <div class="project-card">
-          <div class="project-top">
-            <div class="project-meta">
-              <span class="project-category">Modular Architecture</span>
-              <span class="badge highlight">New Architecture</span>
-            </div>
-            <h3 class="project-title">Modular Monolith in ASP.NET Core (.NET 10)</h3>
-            <p class="project-desc">
-              Production reference implementation combining single-process deployment with strict architectural module boundaries (Catalog, Orders, Payments, Notifications). Utilizes Clean Architecture, Domain-Driven Design, MediatR, and asynchronous event bus communication.
-            </p>
-          </div>
-          <div class="project-bottom">
-            <div class="project-tech">
-              <span class="tech-tag">C# .NET 10</span>
-              <span class="tech-tag">Clean Architecture</span>
-              <span class="tech-tag">DDD</span>
-              <span class="tech-tag">MediatR</span>
-              <span class="tech-tag">MassTransit</span>
-              <span class="tech-tag">EF Core</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/HamidRezaAshkiyan" target="_blank" rel="noopener">
-                <span>⚡ View on GitHub</span> &rarr;
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- KasraCodeChallenge -->
-        <div class="project-card">
-          <div class="project-top">
-            <div class="project-meta">
-              <span class="project-category">Microservices Architecture</span>
-              <span class="badge highlight">Production Ready</span>
-            </div>
-            <h3 class="project-title">Order Management Distributed System</h3>
-            <p class="project-desc">
-              Three independently deployable ASP.NET Core (.NET 10) APIs with clean separation of Domain, Application, and Infrastructure. Features PostgreSQL persistence, RabbitMQ event bus, Keycloak OpenID Connect authentication, and Docker Compose orchestration.
-            </p>
-          </div>
-          <div class="project-bottom">
-            <div class="project-tech">
-              <span class="tech-tag">C# .NET 10</span>
-              <span class="tech-tag">RabbitMQ</span>
-              <span class="tech-tag">PostgreSQL</span>
-              <span class="tech-tag">Keycloak</span>
-              <span class="tech-tag">Docker Compose</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/HamidRezaAshkiyan/KasraCodeChallenge" target="_blank" rel="noopener">
-                <span>⚡ View Repository</span> &rarr;
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- LibTrack -->
-        <div class="project-card">
-          <div class="project-top">
-            <div class="project-meta">
-              <span class="project-category">Domain-Driven Backend</span>
-              <span class="badge">Clean Arch</span>
-            </div>
-            <h3 class="project-title">LibTrack Concurrent Inventory</h3>
-            <p class="project-desc">
-              High-concurrency library reservation and loan management backend. Implements strict state-machine transitions, pessimistic and optimistic lock strategies, and clean architecture layers.
-            </p>
-          </div>
-          <div class="project-bottom">
-            <div class="project-tech">
-              <span class="tech-tag">C# / .NET</span>
-              <span class="tech-tag">EF Core</span>
-              <span class="tech-tag">SQL Server</span>
-              <span class="tech-tag">Clean Architecture</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/KarokampBootcamps/LibTrack" target="_blank" rel="noopener">
-                <span>⚡ View Repository</span> &rarr;
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Telegram AI Story Generator -->
-        <div class="project-card">
-          <div class="project-top">
-            <div class="project-meta">
-              <span class="project-category">Async Worker &amp; AI</span>
-              <span class="badge">Active</span>
-            </div>
-            <h3 class="project-title">Telegram AI Story Engine</h3>
-            <p class="project-desc">
-              Asynchronous worker architecture generating progressive CEFR-aligned English stories for learners. Integrates NLP generation pipelines, spaced repetition tracking, and high-concurrency bot webhooks.
-            </p>
-          </div>
-          <div class="project-bottom">
-            <div class="project-tech">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">Asyncio</span>
-              <span class="tech-tag">Telegram API</span>
-              <span class="tech-tag">Git</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/HamidRezaAshkiyan/telegram-ai-story-generator-for-english-learners" target="_blank" rel="noopener">
-                <span>⚡ View Repository</span> &rarr;
-              </a>
-            </div>
+            <h3>Idempotent Consumers</h3>
+            <p>Inbox deduplication keys and safe retry semantics ensure payment and tax workflows never double-execute.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Blog Section -->
-    <section id="blog">
-      <div class="section-header">
-        <span class="section-tag">// 05. Engineering Notes</span>
-        <h2 class="section-title">Backend Architecture Blog</h2>
-        <p class="section-desc">Practical post-mortems and design deep-dives from 8 years in production. Written in simple Markdown files.</p>
-      </div>
+    <!-- 05. PROJECTS SECTION -->
+    <section id="projects" class="content-section">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <div>
+            <span class="section-tag">// 05. Selected Work</span>
+            <h2 class="section-title">Featured Engineering Projects</h2>
+            <p class="section-desc">Production architectures, flagship desktop systems, and open-source utilities built in C#, Rust, and Swift.</p>
+          </div>
 
-      <!-- Dynamically Rendered Blog List -->
-      <div id="blog-list" class="blog-list">
-        <!-- Rendered by main.js from blog/posts.json -->
+          <div id="project-filters" class="filter-bar" role="group" aria-label="Filter projects">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="backend">Backend &amp; .NET</button>
+            <button class="filter-btn" data-filter="systems">Systems &amp; Rust</button>
+            <button class="filter-btn" data-filter="desktop">Desktop &amp; Tools</button>
+          </div>
+        </div>
+
+        <div class="projects-grid">
+          <!-- ModularMonolith -->
+          <article class="project-card spotlight-card" data-category="backend" data-reveal>
+            <div>
+              <div class="project-meta">
+                <span class="project-category">Backend Architecture</span>
+                <span class="project-lang">C# · .NET 10</span>
+              </div>
+              <h3 class="project-title">Modular Monolith (.NET 10)</h3>
+              <p class="project-desc">
+                Reference implementation combining single-process deployment with strict module isolation (Catalog, Orders, Payments). Built with Clean Architecture, DDD, MediatR, MassTransit, and event-driven contracts.
+              </p>
+            </div>
+            <div class="project-bottom">
+              <div class="tag-row">
+                <span class="tech-tag accent">.NET 10</span>
+                <span class="tech-tag">Clean Architecture</span>
+                <span class="tech-tag">DDD</span>
+                <span class="tech-tag">MediatR</span>
+                <span class="tech-tag">MassTransit</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/HamidRezaAshkiyan/ModularMonolith" target="_blank" rel="noopener">View Repository &rarr;</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Hafez -->
+          <article class="project-card spotlight-card" data-category="desktop" data-reveal>
+            <div>
+              <div class="project-meta">
+                <span class="project-category">Flagship Production System</span>
+                <span class="project-lang">C# · WPF · SQL</span>
+              </div>
+              <h3 class="project-title">Hafez — Multimedia &amp; Hardware Control</h3>
+              <p class="project-desc">
+                Large-scale, highly customized WPF platform built over two years as primary developer. Integrates hardware camera control, Quran &amp; Mafatih playback, high-performance SQL configuration storage, and mobile remote control.
+              </p>
+            </div>
+            <div class="project-bottom">
+              <div class="tag-row">
+                <span class="tech-tag accent">WPF</span>
+                <span class="tech-tag">SQL Server</span>
+                <span class="tech-tag">Hardware Integration</span>
+                <span class="tech-tag">Mobile Remote</span>
+              </div>
+              <div class="project-links">
+                <span style="font-family:var(--font-mono);font-size:0.76rem;color:var(--text-muted);">Yasin Engineering Group · 2-Year Primary Dev</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Social Platform -->
+          <article class="project-card spotlight-card" data-category="backend" data-reveal>
+            <div>
+              <div class="project-meta">
+                <span class="project-category">Full-Stack · Rahnema College</span>
+                <span class="project-lang">Java · React · GraphQL</span>
+              </div>
+              <h3 class="project-title">Social Platform (LinkedIn-like)</h3>
+              <p class="project-desc">
+                Collaborative social networking platform emphasizing Clean Architecture, JWT authentication, GraphQL APIs, React frontend, and Dockerized multi-service deployment under Agile Scrum sprints.
+              </p>
+            </div>
+            <div class="project-bottom">
+              <div class="tag-row">
+                <span class="tech-tag">Spring Boot</span>
+                <span class="tech-tag">GraphQL</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">JWT</span>
+                <span class="tech-tag">Docker</span>
+              </div>
+              <div class="project-links">
+                <span style="font-family:var(--font-mono);font-size:0.76rem;color:var(--text-muted);">Rahnema College Capstone</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Aegis -->
+          <article class="project-card spotlight-card" data-category="systems" data-reveal>
+            <div>
+              <div class="project-meta">
+                <span class="project-category">Open Source · Networking</span>
+                <span class="project-lang">Rust</span>
+              </div>
+              <h3 class="project-title">Aegis — System-Wide Telemetry Blocker</h3>
+              <p class="project-desc">
+                Lightweight, open-source, system-wide ad, tracker, and OS telemetry blocker for Windows and macOS written in Rust, featuring HTTP/SOCKS5 proxy support and VPN chaining.
+              </p>
+            </div>
+            <div class="project-bottom">
+              <div class="tag-row">
+                <span class="tech-tag accent">Rust</span>
+                <span class="tech-tag">HTTP / SOCKS5</span>
+                <span class="tech-tag">VPN Chaining</span>
+                <span class="tech-tag">macOS &amp; Windows</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/HamidRezaAshkiyan/aegis" target="_blank" rel="noopener">View Repository &rarr;</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Ophiuchi-rs -->
+          <article class="project-card spotlight-card" data-category="systems" data-reveal>
+            <div>
+              <div class="project-meta">
+                <span class="project-category">Open Source · Dev Tool</span>
+                <span class="project-lang">Rust</span>
+              </div>
+              <h3 class="project-title">Ophiuchi-rs — Localhost SSL Reverse Proxy</h3>
+              <p class="project-desc">
+                Cross-platform (macOS &amp; Windows) localhost SSL reverse proxy desktop app with a built-in Rust HTTPS/WebSocket proxy and automated Local Root CA management.
+              </p>
+            </div>
+            <div class="project-bottom">
+              <div class="tag-row">
+                <span class="tech-tag accent">Rust</span>
+                <span class="tech-tag">TLS / Local CA</span>
+                <span class="tech-tag">WebSocket Proxy</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/HamidRezaAshkiyan/ophiuchi-rs" target="_blank" rel="noopener">View Repository &rarr;</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Folio -->
+          <article class="project-card spotlight-card" data-category="systems" data-reveal>
+            <div>
+              <div class="project-meta">
+                <span class="project-category">Open Source · TUI + GUI</span>
+                <span class="project-lang">Rust</span>
+              </div>
+              <h3 class="project-title">Folio — Minimal Bullet Journal</h3>
+              <p class="project-desc">
+                Minimalistic cross-platform Bullet Journal companion (TUI + GUI) written in Rust, backed by plain Obsidian-compatible Markdown files for fast, local-first personal knowledge workflows.
+              </p>
+            </div>
+            <div class="project-bottom">
+              <div class="tag-row">
+                <span class="tech-tag accent">Rust</span>
+                <span class="tech-tag">TUI + GUI</span>
+                <span class="tech-tag">Obsidian Markdown</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/HamidRezaAshkiyan/folio" target="_blank" rel="noopener">View Repository &rarr;</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- PadDisplay -->
+          <article class="project-card spotlight-card" data-category="desktop" data-reveal>
+            <div>
+              <div class="project-meta">
+                <span class="project-category">Open Source · Virtual Display</span>
+                <span class="project-lang">Swift &amp; C#</span>
+              </div>
+              <h3 class="project-title">PadDisplay (macOS &amp; Windows)</h3>
+              <p class="project-desc">
+                Turn an iPad into a second monitor over Wi-Fi or USB with no iOS app required — built natively for macOS in Swift and for Windows using a C# IddCx virtual display driver streamed to Safari.
+              </p>
+            </div>
+            <div class="project-bottom">
+              <div class="tag-row">
+                <span class="tech-tag">Swift</span>
+                <span class="tech-tag">C# / IddCx</span>
+                <span class="tech-tag">Low-Latency Streaming</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/HamidRezaAshkiyan/PadDisplay" target="_blank" rel="noopener">macOS &rarr;</a>
+                <a href="https://github.com/HamidRezaAshkiyan/PadDisplay-Windows" target="_blank" rel="noopener">Windows &rarr;</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- PersianKeyboardRedefined -->
+          <article class="project-card spotlight-card" data-category="desktop" data-reveal>
+            <div>
+              <div class="project-meta">
+                <span class="project-category">Open Source · 9★ on GitHub</span>
+                <span class="project-lang">OS Layout</span>
+              </div>
+              <h3 class="project-title">PersianKeyboardRedefined</h3>
+              <p class="project-desc">
+                Redesigns the Persian keyboard layout to combine the typographic accuracy of the Persian Standard layout with the familiarity and ergonomics of everyday layouts.
+              </p>
+            </div>
+            <div class="project-bottom">
+              <div class="tag-row">
+                <span class="tech-tag">Keyboard Layout</span>
+                <span class="tech-tag">Persian Typography</span>
+                <span class="tech-tag">Open Source</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/HamidRezaAshkiyan/PersianKeyboardRedefined" target="_blank" rel="noopener">View Repository &rarr;</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06. ENGINEERING BLOG (MINIMAL STATIC HTML) -->
+    <section id="blog" class="content-section">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <div>
+            <span class="section-tag">// 06. Engineering Notes</span>
+            <h2 class="section-title">Backend Architecture Blog</h2>
+            <p class="section-desc">Minimal static HTML articles — fast, self-contained, and GitHub Pages native with zero client-side markdown overhead.</p>
+          </div>
+          <a href="blog/index.html" class="btn btn-ghost">All Articles &rarr;</a>
+        </div>
+
+        <div class="blog-controls" data-reveal>
+          <div id="blog-filters" class="filter-bar" role="group" aria-label="Filter articles by topic">
+            <button class="filter-btn active" data-tag="all">All</button>
+            <button class="filter-btn" data-tag=".net">.NET</button>
+            <button class="filter-btn" data-tag="rabbitmq">RabbitMQ</button>
+            <button class="filter-btn" data-tag="architecture">Architecture</button>
+            <button class="filter-btn" data-tag="observability">Observability</button>
+          </div>
+          <input type="search" id="blog-search" class="blog-search" placeholder="Search articles..." aria-label="Search blog articles">
+        </div>
+
+        <div class="blog-list" data-reveal>
+          <a href="blog/migrating-15-microservices-to-dotnet-8.html" class="blog-card spotlight-card" data-tags=".net rabbitmq architecture microservices masstransit">
+            <div class="blog-card-main">
+              <div class="blog-meta">
+                <span>2026-11-22</span>
+                <span>&middot;</span>
+                <span>7 min read</span>
+                <span>&middot;</span>
+                <span style="color:var(--accent-green);">NEW</span>
+              </div>
+              <h3 class="blog-title">Migrating 15+ Production Services to .NET 8 &amp; RabbitMQ Quorum Queues</h3>
+              <p class="blog-summary">Field notes on upgrading legacy .NET services without downtime, transitioning RabbitMQ classic queues to quorum queues with MassTransit, and tuning SQL Server stored procedures.</p>
+              <div class="tag-row">
+                <span class="tech-tag accent">.NET 8</span>
+                <span class="tech-tag">RabbitMQ</span>
+                <span class="tech-tag">MassTransit</span>
+                <span class="tech-tag">SQL Server</span>
+              </div>
+            </div>
+            <span class="blog-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+
+          <a href="blog/modular-monolith-clean-architecture.html" class="blog-card spotlight-card" data-tags=".net architecture ddd mediatr masstransit">
+            <div class="blog-card-main">
+              <div class="blog-meta">
+                <span>2026-11-15</span>
+                <span>&middot;</span>
+                <span>8 min read</span>
+              </div>
+              <h3 class="blog-title">Structuring Modular Monoliths with Clean Architecture, MediatR &amp; MassTransit</h3>
+              <p class="blog-summary">How to design loosely coupled modules with independent persistence, strict contract boundaries, and asynchronous event buses before jumping prematurely to microservices.</p>
+              <div class="tag-row">
+                <span class="tech-tag">Modular Monolith</span>
+                <span class="tech-tag">Clean Architecture</span>
+                <span class="tech-tag">DDD</span>
+                <span class="tech-tag">MediatR</span>
+              </div>
+            </div>
+            <span class="blog-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+
+          <a href="blog/transactional-outbox-pattern.html" class="blog-card spotlight-card" data-tags=".net rabbitmq architecture distributed">
+            <div class="blog-card-main">
+              <div class="blog-meta">
+                <span>2026-09-18</span>
+                <span>&middot;</span>
+                <span>7 min read</span>
+              </div>
+              <h3 class="blog-title">Eliminating Dual-Write Hazards: Transactional Outbox Pattern in .NET &amp; RabbitMQ</h3>
+              <p class="blog-summary">Why database commits combined with direct message publishing fail in production, and how to implement a bulletproof transactional outbox with polling workers.</p>
+              <div class="tag-row">
+                <span class="tech-tag">Distributed Systems</span>
+                <span class="tech-tag">RabbitMQ</span>
+                <span class="tech-tag">.NET</span>
+                <span class="tech-tag">Architecture</span>
+              </div>
+            </div>
+            <span class="blog-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+
+          <a href="blog/idempotent-event-processing.html" class="blog-card spotlight-card" data-tags="rabbitmq architecture microservices resilience">
+            <div class="blog-card-main">
+              <div class="blog-meta">
+                <span>2026-07-04</span>
+                <span>&middot;</span>
+                <span>5 min read</span>
+              </div>
+              <h3 class="blog-title">Designing Bulletproof Idempotent Consumers in Distributed Systems</h3>
+              <p class="blog-summary">Network retries and broker reconnects inevitably lead to duplicate messages. Designing zero-duplicate consumer pipelines with inbox tables and Redis locks.</p>
+              <div class="tag-row">
+                <span class="tech-tag">Microservices</span>
+                <span class="tech-tag">RabbitMQ</span>
+                <span class="tech-tag">Resilience</span>
+              </div>
+            </div>
+            <span class="blog-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+
+          <a href="blog/microservices-observability.html" class="blog-card spotlight-card" data-tags="observability opentelemetry docker architecture">
+            <div class="blog-card-main">
+              <div class="blog-meta">
+                <span>2026-05-12</span>
+                <span>&middot;</span>
+                <span>6 min read</span>
+              </div>
+              <h3 class="blog-title">Distributed Tracing &amp; Correlation IDs Across 20+ Microservices</h3>
+              <p class="blog-summary">How to trace a single user request flowing through API gateways, RabbitMQ queues, and background workers using W3C TraceContext and OpenTelemetry.</p>
+              <div class="tag-row">
+                <span class="tech-tag">Observability</span>
+                <span class="tech-tag">OpenTelemetry</span>
+                <span class="tech-tag">Docker</span>
+              </div>
+            </div>
+            <span class="blog-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07. CONTACT SECTION -->
+    <section id="contact" class="content-section" style="border-bottom: none;">
+      <div class="container">
+        <div class="contact-box spotlight-card" data-reveal>
+          <div>
+            <span class="section-tag">// 07. Get In Touch</span>
+            <h2 class="section-title">Let's Build Reliable Systems</h2>
+            <p class="section-desc">
+              Based in Isfahan, Iran. Open to discussing senior backend engineering, .NET microservices architecture, and open-source collaboration.
+            </p>
+          </div>
+
+          <div class="contact-links-grid">
+            <button type="button" class="contact-item" data-copy="hamidrezaashkiyan@gmail.com">
+              <span>Email</span>
+              <span>Copy &rarr;</span>
+            </button>
+            <button type="button" class="contact-item" data-copy="+98 938 928 3165">
+              <span>+98 938 928 3165</span>
+              <span>Copy &rarr;</span>
+            </button>
+            <a href="https://www.linkedin.com/in/hamidrezaashkiyan/" target="_blank" rel="noopener" class="contact-item">
+              <span>LinkedIn</span>
+              <span>/in/hamidrezaashkiyan &nearr;</span>
+            </a>
+            <a href="https://github.com/HamidRezaAshkiyan" target="_blank" rel="noopener" class="contact-item">
+              <span>GitHub</span>
+              <span>@HamidRezaAshkiyan &nearr;</span>
+            </a>
+            <a href="https://t.me/HamidRezaAshkiyan" target="_blank" rel="noopener" class="contact-item">
+              <span>Telegram</span>
+              <span>@HamidRezaAshkiyan &nearr;</span>
+            </a>
+            <a href="assets/Hamid-Reza-Ashkiyan-Resume.pdf" target="_blank" rel="noopener" class="contact-item">
+              <span>Resume</span>
+              <span>Download PDF &darr;</span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
   </main>
 
-  <!-- Post Viewer Modal (Markdown Reader) -->
-  <div id="post-viewer-overlay" class="post-viewer-overlay" onclick="if(event.target === this) closePost()">
-    <div class="post-viewer-container">
-      <div class="post-viewer-header">
-        <button class="btn-close-post" onclick="closePost()">&larr; Back to articles [ESC]</button>
-        <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-green);">// MARKDOWN PREVIEW</span>
-      </div>
-      <div id="post-markdown-content" class="post-content">
-        <!-- Markdown injected here -->
-      </div>
-    </div>
-  </div>
-
   <!-- Interactive Terminal Drawer -->
-  <div id="terminal-drawer" class="terminal-drawer">
+  <div id="terminal-drawer" class="terminal-drawer" role="dialog" aria-label="Interactive CLI Terminal">
     <div class="terminal-bar">
-      <span>terminal@ashkiyan-cluster: ~/microservices</span>
-      <button id="btn-terminal-close" style="background:none; border:none; color:#ef4444; font-family:var(--font-mono); cursor:pointer;">[x] close</button>
+      <span>hamid@mesh: ~/portfolio — press Tab to autocomplete, Esc to close</span>
+      <button id="btn-terminal-close" class="terminal-close-btn">[x] close</button>
     </div>
     <div id="terminal-logs" class="terminal-logs">
-      <div class="terminal-line" style="color: var(--accent-cyan);">Type 'help' to inspect available backend inspection commands.</div>
+      <div class="terminal-line hint">Type 'help' to inspect experience, skills, projects, or blog posts.</div>
     </div>
     <div class="terminal-input-row">
       <span class="terminal-input-prompt">hamid@mesh:~$</span>
-      <input type="text" id="terminal-cli-input" class="terminal-cli-input" placeholder="Type 'help', 'whoami', 'skills', 'arch'..." autocomplete="off" spellcheck="false">
+      <input type="text" id="terminal-cli-input" class="terminal-cli-input" placeholder="help, whoami, experience, skills, projects..." autocomplete="off" spellcheck="false">
     </div>
   </div>
 
@@ -476,12 +917,13 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div>
-        <span>&copy; 2026 Hamid Reza Ashkiyan. Senior Backend Engineer &amp; Architect.</span>
+        <span>&copy; 2026 Hamid Reza Ashkiyan &middot; v1.0.0</span>
       </div>
       <div class="footer-links">
         <a href="https://www.linkedin.com/in/hamidrezaashkiyan/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://github.com/HamidRezaAshkiyan" target="_blank" rel="noopener">GitHub</a>
-        <a href="mailto:hamidrezaashkiyan@gmail.com">Email</a>
+        <a href="https://t.me/HamidRezaAshkiyan" target="_blank" rel="noopener">Telegram</a>
+        <a href="blog/index.html">Blog</a>
         <a href="#about">Top &uarr;</a>
       </div>
     </div>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engineering Blog — Hamid Reza Ashkiyan</title>
+  <meta name="description" content="Backend architecture and distributed systems articles by Hamid Reza Ashkiyan — .NET 8, Clean Architecture, DDD, RabbitMQ Quorum Queues, MassTransit, and SQL Server.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo-link">
+        <span class="logo-prompt">hamid@mesh:~$</span>
+        <span>cd ~/blog</span>
+        <span class="logo-cursor" aria-hidden="true"></span>
+      </a>
+      <nav class="main-nav" aria-label="Blog Navigation">
+        <a href="../index.html#about" class="nav-link">about</a>
+        <a href="../index.html#experience" class="nav-link">experience</a>
+        <a href="../index.html#projects" class="nav-link">projects</a>
+        <a href="index.html" class="nav-link active">blog</a>
+      </nav>
+      <div class="header-actions">
+        <button id="btn-theme-toggle" class="icon-btn" title="Toggle theme" aria-label="Toggle theme"></button>
+        <a href="../index.html" class="icon-btn">&larr; home</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding: 3.5rem 1.5rem 5rem;">
+    <div class="section-header">
+      <div>
+        <span class="section-tag">// Engineering Notes Archive</span>
+        <h1 class="section-title" style="font-size: clamp(1.8rem, 3vw, 2.3rem);">Backend Architecture Blog</h1>
+        <p class="section-desc">Minimal static HTML articles on .NET 8 microservices, messaging resilience, and production lessons.</p>
+      </div>
+    </div>
+
+    <div class="blog-controls">
+      <div id="blog-filters" class="filter-bar" role="group" aria-label="Filter articles">
+        <button class="filter-btn active" data-tag="all">All (5)</button>
+        <button class="filter-btn" data-tag=".net">.NET</button>
+        <button class="filter-btn" data-tag="rabbitmq">RabbitMQ</button>
+        <button class="filter-btn" data-tag="architecture">Architecture</button>
+        <button class="filter-btn" data-tag="observability">Observability</button>
+      </div>
+      <input type="search" id="blog-search" class="blog-search" placeholder="Search articles..." aria-label="Search blog articles">
+    </div>
+
+    <div class="blog-list">
+      <a href="migrating-15-microservices-to-dotnet-8.html" class="blog-card spotlight-card" data-tags=".net rabbitmq architecture microservices masstransit">
+        <div class="blog-card-main">
+          <div class="blog-meta">
+            <span>2026-11-22</span>
+            <span>&middot;</span>
+            <span>7 min read</span>
+            <span>&middot;</span>
+            <span style="color:var(--accent-green);">NEW</span>
+          </div>
+          <h2 class="blog-title">Migrating 15+ Production Services to .NET 8 &amp; RabbitMQ Quorum Queues</h2>
+          <p class="blog-summary">Field notes on upgrading legacy .NET services without downtime, transitioning RabbitMQ classic queues to quorum queues with MassTransit, and tuning SQL Server stored procedures.</p>
+          <div class="tag-row">
+            <span class="tech-tag accent">.NET 8</span>
+            <span class="tech-tag">RabbitMQ</span>
+            <span class="tech-tag">MassTransit</span>
+            <span class="tech-tag">SQL Server</span>
+          </div>
+        </div>
+        <span class="blog-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+
+      <a href="modular-monolith-clean-architecture.html" class="blog-card spotlight-card" data-tags=".net architecture ddd mediatr masstransit">
+        <div class="blog-card-main">
+          <div class="blog-meta">
+            <span>2026-11-15</span>
+            <span>&middot;</span>
+            <span>8 min read</span>
+          </div>
+          <h2 class="blog-title">Structuring Modular Monoliths with Clean Architecture, MediatR &amp; MassTransit</h2>
+          <p class="blog-summary">How to design loosely coupled modules with independent persistence, strict contract boundaries, and asynchronous event buses before jumping prematurely to microservices.</p>
+          <div class="tag-row">
+            <span class="tech-tag">Modular Monolith</span>
+            <span class="tech-tag">Clean Architecture</span>
+            <span class="tech-tag">DDD</span>
+            <span class="tech-tag">MediatR</span>
+          </div>
+        </div>
+        <span class="blog-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+
+      <a href="transactional-outbox-pattern.html" class="blog-card spotlight-card" data-tags=".net rabbitmq architecture distributed">
+        <div class="blog-card-main">
+          <div class="blog-meta">
+            <span>2026-09-18</span>
+            <span>&middot;</span>
+            <span>7 min read</span>
+          </div>
+          <h2 class="blog-title">Eliminating Dual-Write Hazards: Transactional Outbox Pattern in .NET &amp; RabbitMQ</h2>
+          <p class="blog-summary">Why database commits combined with direct message publishing fail in production, and how to implement a bulletproof transactional outbox with polling workers.</p>
+          <div class="tag-row">
+            <span class="tech-tag">Distributed Systems</span>
+            <span class="tech-tag">RabbitMQ</span>
+            <span class="tech-tag">.NET</span>
+            <span class="tech-tag">Architecture</span>
+          </div>
+        </div>
+        <span class="blog-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+
+      <a href="idempotent-event-processing.html" class="blog-card spotlight-card" data-tags="rabbitmq architecture microservices resilience">
+        <div class="blog-card-main">
+          <div class="blog-meta">
+            <span>2026-07-04</span>
+            <span>&middot;</span>
+            <span>5 min read</span>
+          </div>
+          <h2 class="blog-title">Designing Bulletproof Idempotent Consumers in Distributed Systems</h2>
+          <p class="blog-summary">Network retries and broker reconnects inevitably lead to duplicate messages. Designing zero-duplicate consumer pipelines with inbox tables and Redis locks.</p>
+          <div class="tag-row">
+            <span class="tech-tag">Microservices</span>
+            <span class="tech-tag">RabbitMQ</span>
+            <span class="tech-tag">Resilience</span>
+          </div>
+        </div>
+        <span class="blog-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+
+      <a href="microservices-observability.html" class="blog-card spotlight-card" data-tags="observability opentelemetry docker architecture">
+        <div class="blog-card-main">
+          <div class="blog-meta">
+            <span>2026-05-12</span>
+            <span>&middot;</span>
+            <span>6 min read</span>
+          </div>
+          <h2 class="blog-title">Distributed Tracing &amp; Correlation IDs Across 20+ Microservices</h2>
+          <p class="blog-summary">How to trace a single user request flowing through API gateways, RabbitMQ queues, and background workers using W3C TraceContext and OpenTelemetry.</p>
+          <div class="tag-row">
+            <span class="tech-tag">Observability</span>
+            <span class="tech-tag">OpenTelemetry</span>
+            <span class="tech-tag">Docker</span>
+          </div>
+        </div>
+        <span class="blog-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>&copy; 2026 Hamid Reza Ashkiyan &middot; Engineering Blog</span>
+      <div class="footer-links">
+        <a href="../index.html">Portfolio</a>
+        <a href="https://github.com/HamidRezaAshkiyan" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/hamidrezaashkiyan/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
