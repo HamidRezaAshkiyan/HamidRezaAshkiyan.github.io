@@ -3,12 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Designing Bulletproof Idempotent Consumers — Hamid Reza Ashkiyan</title>
-  <meta name="description" content="Network retries and broker reconnects inevitably lead to duplicate messages. Learn how to design zero-duplicate consumer pipelines with inbox tables and Redis locks.">
+  <title>Designing Bulletproof Idempotent Consumers in Distributed Systems — Hamid Reza Ashkiyan</title>
+  <meta name="description" content="Network retries and broker reconnects inevitably lead to duplicate messages. Here is how we design zero-duplicate consumer pipelines with inbox tables and Redis locks.">
+  <meta property="og:title" content="Designing Bulletproof Idempotent Consumers in Distributed Systems">
+  <meta property="og:description" content="Network retries and broker reconnects inevitably lead to duplicate messages. Here is how we design zero-duplicate consumer pipelines with inbox tables and Redis locks.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://hamidrezaashkiyan.github.io/blog/idempotent-event-processing.html">
+  <meta property="og:image" content="https://hamidrezaashkiyan.github.io/assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://hamidrezaashkiyan.github.io/assets/og-card.png">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="alternate" type="application/rss+xml" title="Hamid Reza Ashkiyan — Engineering Blog" href="../feed.xml">
+  <link rel="canonical" href="https://hamidrezaashkiyan.github.io/blog/idempotent-event-processing.html">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Designing Bulletproof Idempotent Consumers in Distributed Systems",
+  "description": "Network retries and broker reconnects inevitably lead to duplicate messages. Here is how we design zero-duplicate consumer pipelines with inbox tables and Redis locks.",
+  "datePublished": "2026-07-04",
+  "author": {
+    "@type": "Person",
+    "name": "Hamid Reza Ashkiyan",
+    "url": "https://hamidrezaashkiyan.github.io/"
+  },
+  "url": "https://hamidrezaashkiyan.github.io/blog/idempotent-event-processing.html",
+  "image": "https://hamidrezaashkiyan.github.io/assets/og-card.png",
+  "keywords": "Microservices, Event-Driven, RabbitMQ, Resilience"
+}
+  </script>
 </head>
 <body>
   <div class="scroll-progress" aria-hidden="true"></div>
@@ -20,121 +47,123 @@
         <span>cat post.html</span>
       </a>
       <div class="header-actions">
+        <button id="btn-cmdk-toggle" class="icon-btn" title="Open Command Palette (Cmd/Ctrl + K)" aria-label="Open Command Palette"><span>⌘K</span></button>
         <button id="btn-theme-toggle" class="icon-btn" title="Toggle theme" aria-label="Toggle theme"></button>
         <a href="index.html" class="icon-btn">&larr; all posts</a>
       </div>
     </div>
   </header>
 
-  <main class="article-shell">
-    <a href="index.html" class="article-back">&larr; Back to Engineering Blog</a>
+  <div class="article-layout">
+    <main class="article-shell">
+      <a href="index.html" class="article-back">&larr; Back to Engineering Blog</a>
 
-    <header class="article-header">
-      <div class="blog-meta">
-        <span>2026-07-04</span>
-        <span>&middot;</span>
-        <span>5 min read</span>
-        <span>&middot;</span>
-        <span>Hamid Reza Ashkiyan</span>
-      </div>
-      <h1>Designing Bulletproof Idempotent Consumers in Distributed Systems</h1>
-      <p class="article-lead">
-        Network retries and broker reconnects inevitably lead to duplicate messages. Here is how we design zero-duplicate consumer pipelines with inbox tables and Redis locks.
-      </p>
-      <div class="tag-row">
-        <span class="tech-tag accent">Microservices</span>
-        <span class="tech-tag">Event-Driven</span>
-        <span class="tech-tag">RabbitMQ</span>
-        <span class="tech-tag">Resilience</span>
-      </div>
-    </header>
-
-    <article class="article-body">
-      <p>
-        In real-world distributed architectures, exactly-once delivery across network boundaries is impractical without coordination overhead that kills throughput. Instead, we embrace <strong>At-Least-Once Delivery + Idempotent Processing</strong>.
-      </p>
-
-      <div class="code-block">
-        <div class="code-block-header">
-          <span>flow</span>
-          <button class="copy-code-btn" type="button">Copy</button>
+      <header class="article-header">
+        <div class="blog-meta">
+          <span>2026-07-04</span>
+          <span>&middot;</span>
+          <span>5 min read</span>
+          <span>&middot;</span>
+          <span>Hamid Reza Ashkiyan</span>
         </div>
-        <pre><code>Message Broker (RabbitMQ) ----[ Message (Id: msg_889a) ]----&gt; Consumer Service
+        <h1>Designing Bulletproof Idempotent Consumers in Distributed Systems</h1>
+        <p class="article-lead">Network retries and broker reconnects inevitably lead to duplicate messages. Here is how we design zero-duplicate consumer pipelines with inbox tables and Redis locks.</p>
+        <div class="tag-row">
+          <span class="tech-tag accent">Microservices</span>
+          <span class="tech-tag">Event-Driven</span>
+          <span class="tech-tag">RabbitMQ</span>
+          <span class="tech-tag">Resilience</span>
+        </div>
+      </header>
+
+      <article class="article-body">
+<p>In real-world distributed architectures, exactly-once delivery across network boundaries is impractical without coordination overhead that kills throughput. Instead, we embrace <strong>At-Least-Once Delivery + Idempotent Processing</strong>.</p>
+
+<div class="code-block">
+  <div class="code-block-header">
+    <span>flow</span>
+    <button class="copy-code-btn" type="button">Copy</button>
+  </div>
+  <pre><code>Message Broker (RabbitMQ) ----[ Message (Id: msg_889a) ]----&gt; Consumer Service
                                                                     |
                                    +--------------------------------+
                                    |
                          [ Step 1: Check Inbox Table ]
-                         SELECT 1 FROM "InboxMessages" WHERE "Id" = 'msg_889a'
+                         SELECT 1 FROM &quot;InboxMessages&quot; WHERE &quot;Id&quot; = &#x27;msg_889a&#x27;
                                    |
                   +----------------+----------------+
                   | Exists                          | New Message
                   v                                 v
           [ ACK &amp; Discard ]               [ Execute Business Logic ]
           (No duplicate charge)                     |
-                                          [ INSERT INTO "InboxMessages" ]
+                                          [ INSERT INTO &quot;InboxMessages&quot; ]
                                                     |
                                           [ ACK to Broker ]</code></pre>
-      </div>
+</div>
 
-      <h2>Idempotency Key Strategies</h2>
+<h2>Idempotency Key Strategies</h2>
 
-      <h3>Strategy A: Natural Idempotency</h3>
-      <p>Whenever possible, design state transitions to be mathematically idempotent:</p>
-      <ul>
-        <li>Setting a state: <code>UPDATE orders SET status = 'Shipped'</code> (idempotent)</li>
-        <li>Mutating relative balances: <code>UPDATE inventory SET stock = stock - 1</code> (non-idempotent without guards)</li>
-      </ul>
+<h3>Strategy A: Natural Idempotency</h3>
 
-      <h3>Strategy B: Transactional Inbox Table</h3>
-      <p>When mutating state across relational models, record the consumed <code>MessageId</code> inside the exact same domain transaction:</p>
+<p>Whenever possible, design state transitions to be mathematically idempotent:</p>
 
-      <div class="code-block">
-        <div class="code-block-header">
-          <span>sql</span>
-          <button class="copy-code-btn" type="button">Copy</button>
-        </div>
-        <pre><code>CREATE TABLE "InboxMessages" (
-    "Id" VARCHAR(64) PRIMARY KEY,
-    "ConsumerName" VARCHAR(100) NOT NULL,
-    "ProcessedOnUtc" TIMESTAMPTZ NOT NULL DEFAULT NOW()
+<ul>
+  <li>Setting a state: <code>UPDATE orders SET status = &#x27;Shipped&#x27;</code> (idempotent)</li>
+  <li>Mutating relative balances: <code>UPDATE inventory SET stock = stock - 1</code> (non-idempotent without guards)</li>
+</ul>
+
+<h3>Strategy B: Transactional Inbox Table</h3>
+
+<p>When mutating state across relational models, record the consumed <code>MessageId</code> inside the exact same domain transaction:</p>
+
+<div class="code-block">
+  <div class="code-block-header">
+    <span>sql</span>
+    <button class="copy-code-btn" type="button">Copy</button>
+  </div>
+  <pre><code>CREATE TABLE &quot;InboxMessages&quot; (
+    &quot;Id&quot; VARCHAR(64) PRIMARY KEY,
+    &quot;ConsumerName&quot; VARCHAR(100) NOT NULL,
+    &quot;ProcessedOnUtc&quot; TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );</code></pre>
-      </div>
-      <p>
-        If a concurrent worker attempts to process the exact same message, the database primary key constraint rejects the duplicate insert automatically, rolling back the duplicate execution safely.
-      </p>
+</div>
 
-      <h3>Strategy C: Redis Distributed Lock with Lease Expiry</h3>
-      <p>For high-frequency events where database roundtrips add unnecessary latency:</p>
+<p>If a concurrent worker attempts to process the exact same message, the database primary key constraint rejects the duplicate insert automatically, rolling back the duplicate execution safely.</p>
 
-      <div class="code-block">
-        <div class="code-block-header">
-          <span>csharp</span>
-          <button class="copy-code-btn" type="button">Copy</button>
-        </div>
-        <pre><code>public async Task&lt;bool&gt; AcquireDeduplicationLockAsync(string messageId, TimeSpan ttl)
+<h3>Strategy C: Redis Distributed Lock with Lease Expiry</h3>
+
+<p>For high-frequency events where database roundtrips add unnecessary latency:</p>
+
+<div class="code-block">
+  <div class="code-block-header">
+    <span>csharp</span>
+    <button class="copy-code-btn" type="button">Copy</button>
+  </div>
+  <pre><code>public async Task&lt;bool&gt; AcquireDeduplicationLockAsync(string messageId, TimeSpan ttl)
 {
-    var key = $"idemp:{messageId}";
+    var key = $&quot;idemp:{messageId}&quot;;
     // SET key value NX PX 10000
-    return await _redis.StringSetAsync(key, "1", ttl, When.NotExists);
+    return await _redis.StringSetAsync(key, &quot;1&quot;, ttl, When.NotExists);
 }</code></pre>
-      </div>
+</div>
 
-      <blockquote>
-        Rule of thumb: If a delivery can fail after the domain write and before the broker ACK, your system will receive a duplicate. Always design consumers as if duplicates happen every hour.
-      </blockquote>
-    </article>
+<blockquote>Rule of thumb: If a delivery can fail after the domain write and before the broker ACK, your system will receive a duplicate. Always design consumers as if duplicates happen every hour.</blockquote>
+      </article>
 
-    <nav class="article-nav" aria-label="Article Navigation">
-      <a href="transactional-outbox-pattern.html">
-        <span class="article-nav-label">&larr; Previous Article</span>
-        <span class="article-nav-title">Eliminating Dual-Write Hazards: Transactional Outbox</span>
-      </a>
-      <a href="microservices-observability.html">
-        <span class="article-nav-label">Next Article &rarr;</span>
-        <span class="article-nav-title">Distributed Tracing &amp; Correlation IDs Across 20+ Services</span>
-      </a>
-    </nav>
-  </main>
+      <nav class="article-nav" aria-label="Article Navigation">
+        <a href="transactional-outbox-pattern.html">
+          <span class="article-nav-label">&larr; Newer Article</span>
+          <span class="article-nav-title">Eliminating Dual-Write Hazards: Transactional Outbox Pattern in .NET &amp; RabbitMQ</span>
+        </a>
+        <a href="microservices-observability.html">
+          <span class="article-nav-label">Older Article &rarr;</span>
+          <span class="article-nav-title">Distributed Tracing &amp; Correlation IDs Across 20+ Microservices</span>
+        </a>
+      </nav>
+    </main>
+
+    <aside id="article-toc" class="article-toc" aria-label="Table of Contents"></aside>
+  </div>
 
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -142,6 +171,7 @@
       <div class="footer-links">
         <a href="../index.html">Portfolio</a>
         <a href="index.html">All Articles</a>
+        <a href="../feed.xml">RSS</a>
       </div>
     </div>
   </footer>

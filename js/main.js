@@ -24,6 +24,9 @@
     initBlogFilters();
     initCopyButtons();
     initTerminal();
+    initCommandPalette();
+    initArticleToc();
+    initCodeHighlight();
   });
 
   /* ------------------------------------------------------------------------
@@ -553,5 +556,277 @@
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#039;");
+  }
+
+  /* ------------------------------------------------------------------------
+     Command Palette (Cmd/Ctrl + K)
+     ------------------------------------------------------------------------ */
+  function initCommandPalette() {
+    const inBlogDir = window.location.pathname.includes("/blog/");
+    const rootPrefix = inBlogDir ? "../" : "";
+    const blogPrefix = inBlogDir ? "" : "blog/";
+
+    const items = [
+      { group: "Navigation", label: "About & Profile", hint: "#about", run: () => go(`${rootPrefix}index.html#about`) },
+      { group: "Navigation", label: "Professional Experience", hint: "#experience", run: () => go(`${rootPrefix}index.html#experience`) },
+      { group: "Navigation", label: "Technical Stack Matrix", hint: "#stack", run: () => go(`${rootPrefix}index.html#stack`) },
+      { group: "Navigation", label: "Microservices Architecture", hint: "#architecture", run: () => go(`${rootPrefix}index.html#architecture`) },
+      { group: "Navigation", label: "Featured Projects", hint: "#projects", run: () => go(`${rootPrefix}index.html#projects`) },
+      { group: "Navigation", label: "Engineering Blog Archive", hint: "/blog", run: () => go(`${blogPrefix}index.html`) },
+      { group: "Navigation", label: "Contact", hint: "#contact", run: () => go(`${rootPrefix}index.html#contact`) },
+
+      { group: "Articles", label: "Migrating 15+ Production Services to .NET 8 & Quorum Queues", hint: ".NET 8", run: () => go(`${blogPrefix}migrating-15-microservices-to-dotnet-8.html`) },
+      { group: "Articles", label: "Structuring Modular Monoliths with Clean Architecture", hint: "DDD", run: () => go(`${blogPrefix}modular-monolith-clean-architecture.html`) },
+      { group: "Articles", label: "Eliminating Dual-Write Hazards: Transactional Outbox", hint: "RabbitMQ", run: () => go(`${blogPrefix}transactional-outbox-pattern.html`) },
+      { group: "Articles", label: "Designing Bulletproof Idempotent Consumers", hint: "Resilience", run: () => go(`${blogPrefix}idempotent-event-processing.html`) },
+      { group: "Articles", label: "Distributed Tracing & Correlation IDs Across 20+ Services", hint: "OTel", run: () => go(`${blogPrefix}microservices-observability.html`) },
+
+      { group: "Actions", label: "Toggle Dark / Light Theme", hint: "Theme", run: () => document.getElementById("btn-theme-toggle")?.click() },
+      { group: "Actions", label: "Open Interactive CLI Terminal", hint: "` key", run: () => document.getElementById("btn-terminal-toggle")?.click() },
+      { group: "Actions", label: "Download Resume (PDF)", hint: "PDF", run: () => window.open(`${rootPrefix}assets/Hamid-Reza-Ashkiyan-Resume.pdf`, "_blank", "noopener") },
+      { group: "Actions", label: "Copy Email (hamidrezaashkiyan@gmail.com)", hint: "Copy", run: () => copyValue("hamidrezaashkiyan@gmail.com") },
+      { group: "Actions", label: "Copy Phone (+98 938 928 3165)", hint: "Copy", run: () => copyValue("+98 938 928 3165") },
+      { group: "Actions", label: "Open LinkedIn Profile", hint: "External", run: () => window.open("https://www.linkedin.com/in/hamidrezaashkiyan/", "_blank", "noopener") },
+      { group: "Actions", label: "Open GitHub Profile", hint: "External", run: () => window.open("https://github.com/HamidRezaAshkiyan", "_blank", "noopener") },
+      { group: "Actions", label: "Open RSS Feed", hint: "feed.xml", run: () => go(`${rootPrefix}feed.xml`) },
+    ];
+
+    function go(url) {
+      if (!inBlogDir && url.startsWith("index.html#")) {
+        const hash = url.slice("index.html".length);
+        const target = document.querySelector(hash);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth" });
+          return;
+        }
+      }
+      window.location.href = url;
+    }
+
+    async function copyValue(val) {
+      try {
+        await navigator.clipboard.writeText(val);
+        showToast(`Copied: ${val}`);
+      } catch {
+        showToast(val);
+      }
+    }
+
+    const overlay = document.createElement("div");
+    overlay.className = "cmdk-overlay";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("aria-label", "Command Palette");
+    overlay.innerHTML = `
+      <div class="cmdk-modal">
+        <div class="cmdk-input-wrap">
+          <span>&gt;</span>
+          <input type="text" class="cmdk-input" placeholder="Jump to section, article, or action..." autocomplete="off" spellcheck="false">
+          <span class="cmdk-kbd">ESC</span>
+        </div>
+        <div class="cmdk-list"></div>
+        <div class="cmdk-footer">
+          <span>&uarr;&darr; navigate &middot; &crarr; select</span>
+          <span>⌘K / Ctrl+K</span>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+
+    const input = overlay.querySelector(".cmdk-input");
+    const list = overlay.querySelector(".cmdk-list");
+    let filtered = items.slice();
+    let selectedIdx = 0;
+
+    function render() {
+      if (!filtered.length) {
+        list.innerHTML = '<div class="cmdk-empty">No matching commands or articles.</div>';
+        return;
+      }
+
+      let html = "";
+      let currentGroup = "";
+      filtered.forEach((item, idx) => {
+        if (item.group !== currentGroup) {
+          currentGroup = item.group;
+          html += `<div class="cmdk-group-label">${escapeHtml(currentGroup)}</div>`;
+        }
+        html += `<button type="button" class="cmdk-item${idx === selectedIdx ? " selected" : ""}" data-idx="${idx}">
+          <span>${escapeHtml(item.label)}</span>
+          <span class="cmdk-item-hint">${escapeHtml(item.hint)}</span>
+        </button>`;
+      });
+      list.innerHTML = html;
+
+      list.querySelectorAll(".cmdk-item").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const i = Number(btn.getAttribute("data-idx"));
+          close();
+          filtered[i]?.run();
+        });
+      });
+    }
+
+    function open() {
+      overlay.classList.add("open");
+      input.value = "";
+      filtered = items.slice();
+      selectedIdx = 0;
+      render();
+      requestAnimationFrame(() => input.focus());
+    }
+
+    function close() {
+      overlay.classList.remove("open");
+    }
+
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) close();
+    });
+
+    const triggerBtn = document.getElementById("btn-cmdk-toggle");
+    if (triggerBtn) triggerBtn.addEventListener("click", open);
+
+    window.addEventListener("keydown", (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        overlay.classList.contains("open") ? close() : open();
+      } else if (e.key === "Escape" && overlay.classList.contains("open")) {
+        close();
+      }
+    });
+
+    input.addEventListener("input", () => {
+      const q = input.value.trim().toLowerCase();
+      filtered = q
+        ? items.filter((it) => `${it.label} ${it.group} ${it.hint}`.toLowerCase().includes(q))
+        : items.slice();
+      selectedIdx = 0;
+      render();
+    });
+
+    input.addEventListener("keydown", (e) => {
+      if (!filtered.length) return;
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        selectedIdx = (selectedIdx + 1) % filtered.length;
+        render();
+        list.querySelector(".cmdk-item.selected")?.scrollIntoView({ block: "nearest" });
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        selectedIdx = (selectedIdx - 1 + filtered.length) % filtered.length;
+        render();
+        list.querySelector(".cmdk-item.selected")?.scrollIntoView({ block: "nearest" });
+      } else if (e.key === "Enter") {
+        e.preventDefault();
+        const item = filtered[selectedIdx];
+        close();
+        item?.run();
+      }
+    });
+  }
+
+  /* ------------------------------------------------------------------------
+     Sticky Mini Table of Contents for Blog Articles
+     ------------------------------------------------------------------------ */
+  function initArticleToc() {
+    const body = document.querySelector(".article-body");
+    const toc = document.getElementById("article-toc");
+    if (!body || !toc) return;
+
+    const headings = Array.from(body.querySelectorAll("h2, h3"));
+    if (headings.length < 2) return;
+
+    const list = document.createElement("ul");
+    list.className = "article-toc-list";
+
+    headings.forEach((h, i) => {
+      if (!h.id) {
+        h.id =
+          (h.textContent || `section-${i}`)
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-|-$/g, "") || `section-${i}`;
+      }
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = `#${h.id}`;
+      a.textContent = h.textContent;
+      if (h.tagName === "H3") a.className = "toc-sub";
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+
+    toc.innerHTML = '<div class="article-toc-title">On this page</div>';
+    toc.appendChild(list);
+    toc.classList.add("has-items");
+
+    if (!("IntersectionObserver" in window)) return;
+    const links = toc.querySelectorAll("a");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            links.forEach((l) => l.classList.toggle("active", l.getAttribute("href") === `#${id}`));
+          }
+        });
+      },
+      { rootMargin: "-20% 0px -70% 0px" }
+    );
+    headings.forEach((h) => observer.observe(h));
+  }
+
+  /* ------------------------------------------------------------------------
+     Zero-Dependency Syntax Highlighting (C# & SQL)
+     ------------------------------------------------------------------------ */
+  function initCodeHighlight() {
+    const blocks = document.querySelectorAll(".code-block");
+    if (!blocks.length) return;
+
+    const csKw = /\b(public|private|protected|internal|sealed|static|readonly|class|record|struct|interface|async|await|return|var|new|if|else|foreach|for|while|using|override|void|null|true|false|is|init|get|set|out)\b/g;
+    const csTypes = /\b(Task|Guid|CancellationToken|TimeSpan|DateTime|Result|List|Dictionary|string|int|bool|byte|object|Activity|ActivityKind|IBasicProperties|IConsumer|ConsumeContext|IRequest|IRequestHandler|IPublisher|ILogger)\b/g;
+    const sqlKw = /\b(SELECT|FROM|WHERE|ORDER\s+BY|LIMIT|FOR\s+UPDATE|SKIP\s+LOCKED|CREATE\s+TABLE|PRIMARY\s+KEY|NOT\s+NULL|DEFAULT|INSERT\s+INTO|UPDATE|SET|ASC|DESC|IS|NULL|AND|OR|VARCHAR|TIMESTAMPTZ|NOW)\b/g;
+
+    blocks.forEach((block) => {
+      const label = (block.querySelector(".code-block-header span")?.textContent || "").toLowerCase();
+      const codeEl = block.querySelector("pre code");
+      if (!codeEl) return;
+
+      const isCsharp = label.startsWith("csharp") || label === "c#";
+      const isSql = label.startsWith("sql");
+      if (!isCsharp && !isSql) return;
+
+      const raw = codeEl.textContent || "";
+      const tokens = [];
+      const stash = (cls, text) => {
+        const idx = tokens.length;
+        tokens.push(`<span class="${cls}">${escapeHtml(text)}</span>`);
+        return `\u0000${idx}\u0000`;
+      };
+
+      let work = raw;
+      if (isCsharp) {
+        work = work.replace(/\/\/[^\n]*/g, (m) => stash("tok-cmt", m));
+        work = work.replace(/\$?"(?:\\.|[^"\\])*"/g, (m) => stash("tok-str", m));
+      } else if (isSql) {
+        work = work.replace(/--[^\n]*/g, (m) => stash("tok-cmt", m));
+        work = work.replace(/'(?:''|[^'])*'/g, (m) => stash("tok-str", m));
+      }
+
+      work = escapeHtml(work);
+
+      if (isCsharp) {
+        work = work.replace(csKw, '<span class="tok-kw">$1</span>');
+        work = work.replace(csTypes, '<span class="tok-type">$1</span>');
+      } else if (isSql) {
+        work = work.replace(sqlKw, '<span class="tok-kw">$1</span>');
+      }
+
+      work = work.replace(/\b(\d+(?:\.\d+)?)\b/g, '<span class="tok-num">$1</span>');
+      work = work.replace(/\u0000(\d+)\u0000/g, (_, i) => tokens[Number(i)]);
+
+      codeEl.innerHTML = work;
+    });
   }
 })();

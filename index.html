@@ -8,10 +8,52 @@
   <meta property="og:title" content="Hamid Reza Ashkiyan — Software Engineer">
   <meta property="og:description" content="Specialized in .NET 8 microservices at scale, migrating legacy systems, and building resilient distributed backends.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hamidrezaashkiyan.github.io/">
+  <meta property="og:image" content="https://hamidrezaashkiyan.github.io/assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hamid Reza Ashkiyan — Software Engineer">
+  <meta name="twitter:description" content="Specialized in .NET 8 microservices at scale, RabbitMQ quorum queues, MassTransit, and fintech backends.">
+  <meta name="twitter:image" content="https://hamidrezaashkiyan.github.io/assets/og-card.png">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="alternate" type="application/rss+xml" title="Hamid Reza Ashkiyan — Engineering Blog" href="feed.xml">
+  <link rel="canonical" href="https://hamidrezaashkiyan.github.io/">
   <link rel="stylesheet" href="css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Hamid Reza Ashkiyan",
+    "jobTitle": "Software Engineer",
+    "url": "https://hamidrezaashkiyan.github.io/",
+    "email": "mailto:hamidrezaashkiyan@gmail.com",
+    "telephone": "+98 938 928 3165",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Isfahan",
+      "addressCountry": "IR"
+    },
+    "worksFor": {
+      "@type": "Organization",
+      "name": "MrBilit"
+    },
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "University of Sheikh Bahaei"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/in/hamidrezaashkiyan/",
+      "https://github.com/HamidRezaAshkiyan",
+      "https://t.me/HamidRezaAshkiyan"
+    ],
+    "knowsAbout": [
+      ".NET 8", "C#", "Microservices", "Domain-Driven Design", "Clean Architecture",
+      "MediatR", "MassTransit", "RabbitMQ", "SQL Server", "Hangfire", "Docker", "Rust"
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -38,6 +80,9 @@
       </nav>
 
       <div class="header-actions">
+        <button id="btn-cmdk-toggle" class="icon-btn" title="Open Command Palette (Cmd/Ctrl + K)" aria-label="Open Command Palette">
+          <span>⌘K</span>
+        </button>
         <button id="btn-theme-toggle" class="icon-btn" title="Toggle theme" aria-label="Toggle theme"></button>
         <button id="btn-terminal-toggle" class="icon-btn accent" title="Press ` key to open terminal">
           <span>&gt;_</span> cli
@@ -74,9 +119,12 @@
       <div class="container hero-inner">
         <div class="hero-grid">
           <div>
-            <div class="status-pill">
-              <span class="status-dot" aria-hidden="true"></span>
-              <span>Isfahan, Iran · BackEnd Developer @ MrBilit</span>
+            <div class="hero-identity">
+              <div class="hero-avatar" aria-hidden="true">HRA</div>
+              <div class="status-pill">
+                <span class="status-dot" aria-hidden="true"></span>
+                <span>Isfahan, Iran · BackEnd Developer @ MrBilit</span>
+              </div>
             </div>
 
             <h1 class="hero-title">Hamid Reza Ashkiyan</h1>
@@ -917,13 +965,14 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div>
-        <span>&copy; 2026 Hamid Reza Ashkiyan &middot; v1.0.0</span>
+        <span>&copy; 2026 Hamid Reza Ashkiyan &middot; v1.1.0</span>
       </div>
       <div class="footer-links">
         <a href="https://www.linkedin.com/in/hamidrezaashkiyan/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://github.com/HamidRezaAshkiyan" target="_blank" rel="noopener">GitHub</a>
         <a href="https://t.me/HamidRezaAshkiyan" target="_blank" rel="noopener">Telegram</a>
         <a href="blog/index.html">Blog</a>
+        <a href="feed.xml">RSS</a>
         <a href="#about">Top &uarr;</a>
       </div>
     </div>
