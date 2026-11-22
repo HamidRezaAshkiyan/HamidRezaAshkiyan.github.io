@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hamid Reza Ashkiyan — Engineering Blog</title>
+    <link>https://hamidrezaashkiyan.github.io/blog/</link>
+    <description>Backend architecture and distributed systems notes on .NET 10, Clean Architecture, DDD, RabbitMQ Quorum Queues, and MassTransit.</description>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 22 Nov 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://hamidrezaashkiyan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Migrating 15+ Production Services to Modern .NET &amp; RabbitMQ Quorum Queues</title>
+      <link>https://hamidrezaashkiyan.github.io/blog/migrating-15-microservices-to-dotnet-8.html</link>
+      <guid isPermaLink="true">https://hamidrezaashkiyan.github.io/blog/migrating-15-microservices-to-dotnet-8.html</guid>
+      <pubDate>Sun, 22 Nov 2026 00:00:00 +0000</pubDate>
+      <description>Field notes on upgrading legacy .NET services without downtime, transitioning RabbitMQ classic queues to quorum queues with MassTransit, and tuning SQL Server stored procedures.</description>
+      <category>.NET 10</category>
+      <category>RabbitMQ</category>
+      <category>MassTransit</category>
+      <category>Hangfire</category>
+      <category>SQL Server</category>
+    </item>
+    <item>
+      <title>Structuring Modular Monoliths with Clean Architecture, MediatR &amp; MassTransit</title>
+      <link>https://hamidrezaashkiyan.github.io/blog/modular-monolith-clean-architecture.html</link>
+      <guid isPermaLink="true">https://hamidrezaashkiyan.github.io/blog/modular-monolith-clean-architecture.html</guid>
+      <pubDate>Sun, 15 Nov 2026 00:00:00 +0000</pubDate>
+      <description>How to design loosely coupled modules with independent persistence, strict contract boundaries, and asynchronous event buses before jumping prematurely to microservices.</description>
+      <category>Modular Monolith</category>
+      <category>Clean Architecture</category>
+      <category>DDD</category>
+      <category>MediatR</category>
+      <category>MassTransit</category>
+    </item>
+    <item>
+      <title>Eliminating Dual-Write Hazards: Transactional Outbox Pattern in .NET &amp; RabbitMQ</title>
+      <link>https://hamidrezaashkiyan.github.io/blog/transactional-outbox-pattern.html</link>
+      <guid isPermaLink="true">https://hamidrezaashkiyan.github.io/blog/transactional-outbox-pattern.html</guid>
+      <pubDate>Fri, 18 Sep 2026 00:00:00 +0000</pubDate>
+      <description>Why database commits combined with direct message publishing fail in production, and how to implement a bulletproof transactional outbox with polling workers or CDC.</description>
+      <category>Distributed Systems</category>
+      <category>RabbitMQ</category>
+      <category>.NET</category>
+      <category>PostgreSQL</category>
+      <category>Architecture</category>
+    </item>
+    <item>
+      <title>Designing Bulletproof Idempotent Consumers in Distributed Systems</title>
+      <link>https://hamidrezaashkiyan.github.io/blog/idempotent-event-processing.html</link>
+      <guid isPermaLink="true">https://hamidrezaashkiyan.github.io/blog/idempotent-event-processing.html</guid>
+      <pubDate>Sat, 04 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Network retries and broker reconnects inevitably lead to duplicate messages. Here is how we design zero-duplicate consumer pipelines with inbox tables and Redis locks.</description>
+      <category>Microservices</category>
+      <category>Event-Driven</category>
+      <category>RabbitMQ</category>
+      <category>Resilience</category>
+    </item>
+    <item>
+      <title>Distributed Tracing &amp; Correlation IDs Across 20+ Microservices</title>
+      <link>https://hamidrezaashkiyan.github.io/blog/microservices-observability.html</link>
+      <guid isPermaLink="true">https://hamidrezaashkiyan.github.io/blog/microservices-observability.html</guid>
+      <pubDate>Tue, 12 May 2026 00:00:00 +0000</pubDate>
+      <description>How to trace a single user request flowing through API gateways, messaging queues, and background processors without losing the correlation trail.</description>
+      <category>Observability</category>
+      <category>OpenTelemetry</category>
+      <category>Docker</category>
+      <category>DevOps</category>
+    </item>
+  </channel>
+</rss>

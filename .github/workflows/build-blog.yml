@@ -1,0 +1,37 @@
+name: Build Minimal HTML Blog
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "posts/**"
+      - "scripts/build_blog.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-blog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate static HTML articles, RSS feed & sitemap
+        run: python3 scripts/build_blog.py
+
+      - name: Commit generated files if changed
+        run: |
+          if [ -n "$(git status --porcelain blog/ feed.xml sitemap.xml)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add blog/ feed.xml sitemap.xml
+            git commit -m "chore(blog): rebuild minimal HTML posts, RSS feed, and sitemap"
+            git push
+          fi

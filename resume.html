@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume — Hamid Reza Ashkiyan</title>
+  <meta name="description" content="Resume of Hamid Reza Ashkiyan — Software Engineer specialized in .NET microservices, DDD, Clean Architecture, RabbitMQ, MassTransit, and SQL Server.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .resume-shell { max-width: 820px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+    .resume-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); margin-bottom: 2rem; }
+    .resume-top h1 { font-size: 2rem; letter-spacing: -0.03em; margin-bottom: 0.25rem; }
+    .resume-links { display: flex; flex-wrap: wrap; gap: 0.85rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.6rem; }
+    .resume-links a { color: var(--accent-cyan); text-decoration: none; }
+    .resume-links a:hover { text-decoration: underline; }
+    .resume-sec { margin-bottom: 2.25rem; }
+    .resume-sec h2 { font-family: var(--font-mono); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-green); border-bottom: 1px solid var(--border-color); padding-bottom: 0.45rem; margin-bottom: 1.1rem; }
+    .resume-entry { margin-bottom: 1.35rem; }
+    .resume-entry-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.35rem; }
+    .resume-entry-head h3 { font-size: 1.02rem; font-weight: 600; }
+    .resume-entry-head span { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); }
+    .resume-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    @media (max-width: 700px) { .resume-cols { grid-template-columns: 1fr; } }
+    @media print { .no-print { display: none !important; } .resume-shell { padding: 0; } }
+  </style>
+</head>
+<body>
+  <header class="site-header no-print">
+    <div class="container header-inner">
+      <a href="index.html" class="logo-link">
+        <span class="logo-prompt">hamid@mesh:~$</span>
+        <span>cat resume.html</span>
+      </a>
+      <div class="header-actions">
+        <button id="btn-theme-toggle" class="icon-btn" title="Toggle theme" aria-label="Toggle theme"></button>
+        <button type="button" class="icon-btn accent" onclick="window.print()">Print / Save PDF</button>
+        <a href="index.html" class="icon-btn">&larr; home</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="resume-shell">
+    <div class="resume-top">
+      <div>
+        <h1>Hamid Reza Ashkiyan</h1>
+        <div class="hero-role" style="margin-bottom:0.4rem;">Software Engineer // .NET 10 Microservices &amp; Distributed Systems</div>
+        <div class="resume-links">
+          <span>Isfahan, Iran</span>
+          <span>&middot;</span>
+          <a href="mailto:hamidrezaashkiyan@gmail.com">hamidrezaashkiyan@gmail.com</a>
+          <span>&middot;</span>
+          <a href="https://www.linkedin.com/in/hamidrezaashkiyan/" target="_blank" rel="noopener">LinkedIn</a>
+          <span>&middot;</span>
+          <a href="https://github.com/HamidRezaAshkiyan" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary no-print" onclick="window.print()">Print / Save PDF</button>
+    </div>
+
+    <section class="resume-sec">
+      <h2>Summary</h2>
+      <p style="color:var(--text-secondary);">
+        Software Engineer specialized in modern .NET microservices at scale, with hands-on experience migrating 15+ legacy services, upgrading high-reliability RabbitMQ messaging infrastructure, and integrating fintech payment systems in high-traffic platforms.
+      </p>
+    </section>
+
+    <section class="resume-sec">
+      <h2>Professional Experience</h2>
+
+      <div class="resume-entry">
+        <div class="resume-entry-head">
+          <h3>BackEnd Developer — Entekhab Group</h3>
+          <span>Isfahan · Present</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Designing and scaling distributed backend services and REST APIs using <strong>.NET 10</strong>, <strong>DDD</strong>, and <strong>Clean Architecture</strong>.</li>
+          <li>Building resilient event-driven workflows and high-throughput data pipelines across enterprise systems.</li>
+        </ul>
+      </div>
+
+      <div class="resume-entry">
+        <div class="resume-entry-head">
+          <h3>BackEnd Developer — MrBilit</h3>
+          <span>Isfahan · May 2022 – 2026</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Designed and implemented backend services and REST APIs using <strong>.NET</strong>, <strong>DDD</strong>, and <strong>microservices</strong> principles.</li>
+          <li><strong>Migrated 15+ services to modern .NET</strong>, enhancing runtime performance and long-term maintainability.</li>
+          <li>Integrated external payment gateways (<strong>Zarrinpal</strong>, <strong>Azkivam</strong>) and automated <strong>tax registration systems</strong>.</li>
+          <li>Upgraded messaging infrastructure to <strong>RabbitMQ quorum queues</strong> with <strong>MassTransit</strong> to increase fault tolerance.</li>
+          <li>Implemented background job processing using <strong>Hangfire</strong> and containerized deployments with <strong>Docker</strong>.</li>
+          <li>Optimized critical <strong>SQL Server</strong> stored procedures and query execution plans.</li>
+        </ul>
+      </div>
+
+      <div class="resume-entry">
+        <div class="resume-entry-head">
+          <h3>Software Development Bootcamp — Rahnema College</h3>
+          <span>Remote · Sep 2021 – Dec 2021</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Completed an intensive full-stack engineering bootcamp focused on <strong>Agile (Scrum)</strong> methodologies.</li>
+          <li>Collaborated on a LinkedIn-like social platform using <strong>Java (Spring Boot)</strong>, <strong>React</strong>, and <strong>GraphQL</strong>.</li>
+        </ul>
+      </div>
+
+      <div class="resume-entry">
+        <div class="resume-entry-head">
+          <h3>Back End Developer — Cartiba</h3>
+          <span>Isfahan · Aug 2020 – Jan 2021</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Developed and maintained the backend infrastructure and RESTful APIs for a <strong>Laravel</strong>-based e-commerce platform.</li>
+        </ul>
+      </div>
+
+      <div class="resume-entry">
+        <div class="resume-entry-head">
+          <h3>Software Developer — Yasin Engineering Group</h3>
+          <span>Isfahan · Jul 2017 – Mar 2020</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Primary developer for desktop and web applications with end-to-end ownership from design to deployment.</li>
+          <li>Built comprehensive clinic management systems and large-scale <strong>WPF</strong> applications (including <strong>Hafez</strong>).</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="resume-sec">
+      <h2>Skills</h2>
+      <div class="resume-cols" style="color:var(--text-secondary); font-size:0.92rem;">
+        <div>
+          <p><strong style="color:var(--text-primary);">Backend:</strong> .NET 10 / .NET, C#, ASP.NET Core, Microservices, DDD, Clean Architecture, MediatR, Hangfire, EF Core, Dapper</p>
+          <p style="margin-top:0.6rem;"><strong style="color:var(--text-primary);">Data &amp; Messaging:</strong> SQL Server, PostgreSQL, Redis, RabbitMQ (Quorum Queues), MassTransit</p>
+        </div>
+        <div>
+          <p><strong style="color:var(--text-primary);">DevOps &amp; Tools:</strong> Docker, Docker Compose, Git, Keycloak (OIDC/JWT), OpenTelemetry, Serilog</p>
+          <p style="margin-top:0.6rem;"><strong style="color:var(--text-primary);">Systems &amp; Interests:</strong> Rust, Swift, WPF, AI/LLM Integration (Ollama, OpenClaw), Open Source, Workflow Automation</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="resume-sec">
+      <div class="resume-cols">
+        <div>
+          <h2>Education</h2>
+          <p><strong style="color:var(--text-primary);">B.Sc. in Information Technology</strong></p>
+          <p style="color:var(--text-secondary); font-size:0.9rem;">University of Sheikh Bahaei, Isfahan (2015 – 2020)</p>
+        </div>
+        <div>
+          <h2>Certifications &amp; Languages</h2>
+          <ul class="exp-bullets">
+            <li><strong>ACM-ICPC Asia Region</strong> — Certificate of Achievement (Sharif University)</li>
+            <li><strong>Software Development Certificate</strong> — Rahnema College</li>
+            <li><strong>Languages:</strong> Persian (Native), English (Professional)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

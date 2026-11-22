@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Route Not Found | Hamid Reza Ashkiyan</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="logo-link">
+        <span class="logo-prompt">hamid@mesh:~$</span>
+        <span>cd ~</span>
+        <span class="logo-cursor" aria-hidden="true"></span>
+      </a>
+      <div class="header-actions">
+        <button id="btn-theme-toggle" class="icon-btn" title="Toggle theme" aria-label="Toggle theme"></button>
+        <a href="/" class="icon-btn accent">&larr; home</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="flex:1; display:flex; align-items:center; justify-content:center; padding: 4rem 1.5rem;">
+    <div class="hero-terminal-card" style="max-width: 620px; width: 100%;">
+      <div class="card-topbar">
+        <div class="window-dots" aria-hidden="true">
+          <span class="dot-red"></span>
+          <span class="dot-yellow"></span>
+          <span class="dot-green"></span>
+        </div>
+        <span>HTTP 404 — Not Found</span>
+        <span>ashkiyan.dev</span>
+      </div>
+      <div class="terminal-content" style="padding: 1.75rem;">
+        <div class="terminal-cmd">
+          <span class="prompt-user">hamid@mesh:~$</span> curl -I <span id="missing-path">/unknown</span>
+        </div>
+        <pre class="json-output" style="margin-bottom: 1.5rem;"><code>{
+  <span class="json-key">"status"</span>: 404,
+  <span class="json-key">"error"</span>: <span class="json-str">"Route not found on this node"</span>,
+  <span class="json-key">"suggestion"</span>: <span class="json-str">"Return to portfolio root or browse engineering blog"</span>
+}</code></pre>
+        <div class="btn-group">
+          <a href="/" class="btn btn-primary">&larr; Back to Portfolio</a>
+          <a href="/blog/index.html" class="btn btn-outline">Read Blog &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>&copy; 2026 Hamid Reza Ashkiyan</span>
+      <div class="footer-links">
+        <a href="/">Portfolio</a>
+        <a href="/blog/index.html">Blog</a>
+        <a href="/feed.xml">RSS</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const el = document.getElementById("missing-path");
+    if (el) el.textContent = window.location.pathname || "/unknown";
+  </script>
+  <script src="/js/main.js"></script>
+</body>
+</html>
