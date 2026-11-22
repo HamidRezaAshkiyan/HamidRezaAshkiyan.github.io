@@ -409,8 +409,8 @@
         appendLine(
           "Hamid Reza Ashkiyan — Software Engineer (Backend & Distributed Systems)\n" +
             "Location:  Isfahan, Iran\n" +
-            "Current:   BackEnd Developer at Entekhab Group\n" +
-            "Focus:     .NET 10 microservices at scale, legacy migrations, distributed systems\n" +
+            "Current:   BackEnd Developer @ Deka (Entekhab Group) — Building DekaSeir\n" +
+            "Focus:     ASP.NET 10, Ocelot Gateway, gRPC, Kafka, Redis, Clean Arch, CQRS\n" +
             'Quote:     "Write code that\'s easy to change, not just easy to write."',
           "output",
           logsEl
@@ -419,9 +419,11 @@
 
       case "experience":
         appendLine(
-          "[Current]      BackEnd Developer at Entekhab Group (Isfahan)\n" +
-            "  • Designing & scaling distributed backend services with .NET 10, DDD & Clean Architecture\n\n" +
-            "[2022–2026]    BackEnd Developer at MrBilit (Isfahan)\n" +
+          "[Current]      BackEnd Developer @ Deka (Entekhab Group) — DekaSeir Platform\n" +
+            "  • ASP.NET 10 microservices with Ocelot Gateway, Clean Architecture & CQRS\n" +
+            "  • gRPC inter-service communication, Kafka event streaming & Redis caching\n" +
+            "  • Maintaining code/DBs & collaborating with DevOps & Identity Service teams\n\n" +
+            "[2022–2026]    BackEnd Developer @ MrBilit (Isfahan)\n" +
             "  • Migrated 15+ services to modern .NET with DDD & microservices\n" +
             "  • Integrated Zarrinpal, Azkivam & automated tax registration\n" +
             "  • Upgraded RabbitMQ to quorum queues with MassTransit; Hangfire + Docker\n\n" +
@@ -456,8 +458,8 @@
 
       case "skills":
         appendLine(
-          "Backend:   .NET 10 / .NET, C#, ASP.NET Core, DDD, Clean Architecture, MediatR, Hangfire\n" +
-            "Data/Msg:  SQL Server, PostgreSQL, Redis, RabbitMQ (Quorum Queues), MassTransit\n" +
+          "Backend:   ASP.NET 10 / .NET, C#, Ocelot Gateway, gRPC, Clean Arch, CQRS, DDD, MediatR, Hangfire\n" +
+            "Data/Msg:  Kafka, Redis, SQL Server, PostgreSQL, RabbitMQ (Quorum Queues), MassTransit\n" +
             "DevOps:    Docker, Docker Compose, Git, Keycloak (OIDC/JWT), OpenTelemetry\n" +
             "Systems:   Rust, Swift, Python, WPF, Java (Spring Boot), Laravel\n" +
             "Interests: AI/LLM Integration (Ollama, OpenClaw), Open Source, Workflow Automation",
@@ -468,14 +470,15 @@
 
       case "projects":
         appendLine(
-          "1. ModularMonolith         ASP.NET Core (.NET 10), Clean Arch, DDD, MediatR, MassTransit\n" +
-            "2. Hafez                   2-year large-scale WPF system, hardware control & mobile remote\n" +
-            "3. Social Platform         Clean Architecture, Spring Boot, React, GraphQL, JWT, Docker\n" +
-            "4. aegis                   Rust system-wide ad/tracker/telemetry blocker (macOS & Win)\n" +
-            "5. ophiuchi-rs             Rust localhost SSL reverse proxy & Local Root CA\n" +
-            "6. folio                   Rust Bullet Journal (TUI + GUI) backed by Obsidian Markdown\n" +
-            "7. PadDisplay              iPad second monitor for macOS (Swift) & Windows (C# IddCx)\n" +
-            "8. PersianKeyboardRedefined Redesigned Persian keyboard layout (9★)",
+          "1. DekaSeir                ASP.NET 10 microservices, Ocelot, gRPC, Kafka, Redis, CQRS (Deka / Entekhab)\n" +
+            "2. ModularMonolith         ASP.NET Core (.NET 10), Clean Arch, DDD, MediatR, MassTransit\n" +
+            "3. Hafez                   2-year large-scale WPF system, hardware control & mobile remote\n" +
+            "4. Social Platform         Clean Architecture, Spring Boot, React, GraphQL, JWT, Docker\n" +
+            "5. aegis                   Rust system-wide ad/tracker/telemetry blocker (macOS & Win)\n" +
+            "6. ophiuchi-rs             Rust localhost SSL reverse proxy & Local Root CA\n" +
+            "7. folio                   Rust Bullet Journal (TUI + GUI) backed by Obsidian Markdown\n" +
+            "8. PadDisplay              iPad second monitor for macOS (Swift) & Windows (C# IddCx)\n" +
+            "9. PersianKeyboardRedefined Redesigned Persian keyboard layout (9★)",
           "output",
           logsEl
         );
@@ -495,16 +498,13 @@
 
       case "arch":
         appendLine(
-          "[Gateway] -> [Auth/OIDC] -> [.NET 10 Service (MediatR/DDD)]\n" +
-            "                                 |                   |\n" +
-            "                                 v                   v\n" +
-            "                       [SQL Server + Outbox]   [Hangfire Jobs]\n" +
-            "                                 |\n" +
-            "                                 v\n" +
-            "                  [MassTransit + RabbitMQ Quorum Queues]\n" +
-            "                                 |\n" +
-            "                                 v\n" +
-            "              [Payments Consumer: Zarrinpal / Azkivam / Tax]",
+          "[Ocelot Gateway] -> [Identity Service] -> [ASP.NET 10 Service (CQRS/Clean Arch)]\n" +
+            "                                               | (gRPC)             | (Cache)\n" +
+            "                                               v                    v\n" +
+            "                                    [Peer Services]            [Redis + SQL Server]\n" +
+            "                                               |\n" +
+            "                                               v\n" +
+            "                                   [Kafka / RabbitMQ Event Bus]",
           "output",
           logsEl
         );
